@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Mathai Money Tracker</title>
 
     <style>
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #f4f6f8;
-            color: #222;
+            background: #f0fdfa;
+            color: #134e4a;
         }
 
         header {
-            background: linear-gradient(135deg, #1d2671, #c33764);
+            background: linear-gradient(135deg, #0f766e, #14b8a6);
             color: white;
             text-align: center;
             padding: 60px 20px;
@@ -38,7 +40,7 @@
         nav a {
             margin: 0 15px;
             text-decoration: none;
-            color: #1d2671;
+            color: #0f766e;
             font-weight: bold;
         }
 
@@ -52,11 +54,11 @@
         }
 
         h2 {
-            color: #1d2671;
+            color: #0f766e;
         }
 
         button {
-            background: #1d2671;
+            background: #0f766e;
             color: white;
             border: none;
             padding: 12px 18px;
@@ -64,6 +66,10 @@
             border-radius: 10px;
             cursor: pointer;
             font-size: 15px;
+        }
+
+        button:hover {
+            background: #14b8a6;
         }
 
         input, select, textarea {
@@ -89,8 +95,9 @@
         footer {
             text-align: center;
             padding: 20px;
-            color: #666;
+            color: #134e4a;
         }
+
     </style>
 </head>
 
@@ -110,7 +117,9 @@
     </nav>
 
     <section id="home">
+
         <h2>Home</h2>
+
         <p>Welcome to your personal money tracking dashboard.</p>
 
         <div class="quick-buttons">
@@ -118,12 +127,15 @@
             <button>Log Income</button>
             <button>Tally Bank</button>
         </div>
+
     </section>
 
     <section id="expense">
+
         <h2>Enter Expense</h2>
 
         <form>
+
             <label>Date:</label>
             <input type="date">
 
@@ -135,6 +147,7 @@
             <br><br>
 
             <label>Payment Type:</label>
+
             <select>
                 <option>Cash</option>
                 <option>Card</option>
@@ -144,6 +157,7 @@
             <br><br>
 
             <label>Expense Category:</label>
+
             <select>
                 <option>Rent</option>
                 <option>Outside Food</option>
@@ -157,18 +171,23 @@
             <br><br>
 
             <label>Description Optional:</label>
+
             <textarea placeholder="Write a short note if needed"></textarea>
 
             <br><br>
 
             <button type="submit">Save Expense</button>
+
         </form>
+
     </section>
 
     <section id="income">
+
         <h2>Log Income</h2>
 
         <form>
+
             <label>Date:</label>
             <input type="date">
 
@@ -180,6 +199,7 @@
             <br><br>
 
             <label>Income Type:</label>
+
             <select>
                 <option>Salary</option>
             </select>
@@ -197,13 +217,17 @@
             <br><br>
 
             <button type="submit">Save Income</button>
+
         </form>
+
     </section>
 
     <section id="bank">
+
         <h2>Tally Bank / Opening Balance</h2>
 
         <form>
+
             <label>Bank Name:</label>
             <input type="text" placeholder="Example: ANZ">
 
@@ -215,11 +239,15 @@
             <br><br>
 
             <button type="submit">Save Bank</button>
+
         </form>
+
     </section>
 
     <section id="cashflow">
+
         <h2>Cashflow</h2>
+
         <p>Select a date range to compare inflow and outflow.</p>
 
         <label>Start Date:</label>
@@ -234,43 +262,54 @@
 
         <button>Show Inflow vs Outflow</button>
         <button>Monthly View</button>
+
     </section>
 
     <section id="expenses">
+
         <h2>Expenses</h2>
+
         <p>Your expense records will appear here later.</p>
 
         <table border="1" width="100%" cellpadding="10">
+
             <tr>
                 <th>Date</th>
                 <th>Category</th>
                 <th>Payment Type</th>
                 <th>Amount</th>
             </tr>
+
             <tr>
                 <td>Example</td>
                 <td>Outside Food</td>
                 <td>Card</td>
                 <td>$25</td>
             </tr>
+
         </table>
+
     </section>
 
     <section id="analytics">
+
         <h2>Analytics</h2>
+
         <p>Charts and summaries will appear here later once JavaScript is added.</p>
+
     </section>
 
     <section id="menu">
+
         <h2>Menu</h2>
 
         <ul class="menu-list">
             <li>Configure Opening Balance</li>
             <li>Configure Expense Category</li>
-            <li>Configure Income Category</li>
             <li>Export JSON File</li>
             <li>Import JSON File</li>
         </ul>
+
     </section>
 
     <footer>
@@ -278,4 +317,5 @@
     </footer>
 
 </body>
+
 </html>
