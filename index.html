@@ -1,346 +1,816 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Mathai Money Tracker</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mathai Money Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet" />
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f8f7f4;
-            color: #1f2937;
-        }
+  <style>
+    :root {
+      --bg:          #fefcf8;
+      --bg-soft:     #faf6ef;
+      --bg-card:     #ffffff;
+      --cream:       #f5ede0;
+      --cream-mid:   #ecdcca;
+      --burg:        #8b2035;
+      --burg-dk:     #6b1828;
+      --burg-lt:     #c25a6e;
+      --burg-pale:   #f9eaed;
+      --gold:        #c8973f;
+      --gold-pale:   #fdf3e3;
+      --text:        #2d1f1f;
+      --text-mid:    #6b4f4f;
+      --text-soft:   #a08888;
+      --border:      #ead9d9;
+      --success:     #2a7d4f;
+      --success-bg:  #edf7f2;
+      --danger:      #b52535;
+      --danger-bg:   #fdf0f1;
+      --radius:      16px;
+      --radius-sm:   10px;
+      --shadow:      0 2px 16px rgba(139,32,53,0.07);
+    }
 
-        header {
-            background: linear-gradient(135deg, #0f172a, #1e3a8a);
-            color: white;
-            text-align: center;
-            padding: 70px 20px;
-        }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        header h1 {
-            font-size: 44px;
-            margin: 0;
-            letter-spacing: 1px;
-        }
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
 
-        header p {
-            font-size: 18px;
-            margin-top: 12px;
-            color: #f5d76e;
-        }
+    /* HEADER */
+    header {
+      background: linear-gradient(160deg, #fff9f4 0%, #fef3ea 50%, #fdeae2 100%);
+      border-bottom: 1px solid var(--cream-mid);
+      padding: 56px 24px 44px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: rgba(139,32,53,0.04);
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: rgba(200,151,63,0.06);
+    }
+    .header-inner { position: relative; z-index: 1; }
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(34px, 6vw, 54px);
+      font-weight: 700;
+      color: var(--burg);
+      line-height: 1.15;
+    }
+    header h1 span { color: var(--burg-dk); }
+    .tagline {
+      margin-top: 10px;
+      font-size: 15px;
+      color: var(--text-mid);
+    }
 
-        nav {
-            background: white;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            position: sticky;
-            top: 0;
-        }
+    /* NAV */
+    nav {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      display: flex;
+      justify-content: center;
+      gap: 2px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 8px rgba(139,32,53,0.06);
+    }
+    nav a {
+      display: inline-block;
+      padding: 15px 20px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--text-soft);
+      border-bottom: 2.5px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    nav a:hover { color: var(--burg); }
+    nav a.active { color: var(--burg); border-bottom-color: var(--burg); }
 
-        nav a {
-            margin: 0 14px;
-            text-decoration: none;
-            color: #1e3a8a;
-            font-weight: bold;
-        }
+    /* LAYOUT */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
 
-        section {
-            background: white;
-            margin: 25px auto;
-            padding: 25px;
-            max-width: 850px;
-            border-radius: 18px;
-            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
-        }
+    /* CARD */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 30px;
+      box-shadow: var(--shadow);
+    }
+    .card-header { margin-bottom: 22px; }
+    .card-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: var(--burg-dk);
+      margin-bottom: 4px;
+    }
+    .card-header p { font-size: 14px; color: var(--text-soft); }
 
-        h2 {
-            color: #1e3a8a;
-        }
+    /* SUMMARY BOXES */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 26px;
+    }
+    .sbox {
+      background: var(--bg-soft);
+      border: 1px solid var(--cream-mid);
+      border-radius: var(--radius-sm);
+      padding: 18px 20px;
+    }
+    .sbox label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      margin-bottom: 8px;
+    }
+    .sbox .val {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      color: var(--text);
+    }
+    .sbox.inc { background: var(--success-bg); border-color: #b8deca; }
+    .sbox.inc .val { color: var(--success); }
+    .sbox.exp { background: var(--danger-bg); border-color: #f0c5c9; }
+    .sbox.exp .val { color: var(--danger); }
 
-        button {
-            background: #1e3a8a;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            margin: 8px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 15px;
-            font-weight: bold;
-        }
+    /* QUICK BUTTONS */
+    .quick-row { display: flex; flex-wrap: wrap; gap: 12px; }
+    .quick-row a { text-decoration: none; }
 
-        button:hover {
-            background: #d4af37;
-            color: #0f172a;
-        }
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 12px 22px;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+    .btn-primary { background: var(--burg); color: #fff; }
+    .btn-primary:hover { background: var(--burg-dk); box-shadow: 0 4px 14px rgba(139,32,53,0.22); transform: translateY(-1px); }
+    .btn-gold { background: var(--gold); color: #fff; }
+    .btn-gold:hover { background: #b0832f; box-shadow: 0 4px 14px rgba(200,151,63,0.28); transform: translateY(-1px); }
+    .btn-soft { background: var(--burg-pale); color: var(--burg); border: 1px solid #f0c5c9; }
+    .btn-soft:hover { background: #f5d4d9; }
+    .btn-outline { background: transparent; color: var(--burg); border: 1.5px solid var(--burg); }
+    .btn-outline:hover { background: var(--burg-pale); }
+    .btn-block {
+      width: 100%;
+      justify-content: center;
+      padding: 14px;
+      font-size: 15px;
+      border-radius: var(--radius-sm);
+      margin-top: 10px;
+    }
 
-        input, select, textarea {
-            width: 95%;
-            padding: 11px;
-            margin-top: 6px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-        }
+    /* FORMS */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .form-grid .full { grid-column: 1 / -1; }
+    .fg { display: flex; flex-direction: column; gap: 6px; }
+    .fg label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+      color: var(--text-mid);
+    }
+    .fg label .opt {
+      font-weight: 400; font-size: 11px;
+      color: var(--gold); text-transform: none;
+      letter-spacing: 0; margin-left: 4px;
+    }
+    .fg input,
+    .fg select,
+    .fg textarea {
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px;
+      color: var(--text);
+      background: var(--bg-soft);
+      border: 1.5px solid var(--cream-mid);
+      border-radius: var(--radius-sm);
+      padding: 11px 14px;
+      width: 100%;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      transition: border-color 0.18s, box-shadow 0.18s, background 0.18s;
+    }
+    .fg input:focus,
+    .fg select:focus,
+    .fg textarea:focus {
+      border-color: var(--burg-lt);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(139,32,53,0.08);
+    }
+    .fg textarea { height: 90px; resize: vertical; }
 
-        textarea {
-            height: 80px;
-        }
+    /* TABLE */
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    thead tr { background: var(--bg-soft); }
+    th {
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      border-bottom: 1px solid var(--border);
+    }
+    tbody tr { border-bottom: 1px solid var(--cream); transition: background 0.12s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--bg-soft); }
+    td { padding: 13px 16px; color: var(--text); }
+    .badge {
+      display: inline-block;
+      background: var(--burg-pale);
+      color: var(--burg);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .amt { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; }
+    .amt.neg { color: var(--danger); }
+    .amt.pos { color: var(--success); }
 
-        .quick-buttons {
-            text-align: center;
-            margin-top: 20px;
-        }
+    /* CASHFLOW */
+    .cf-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 14px;
+      align-items: flex-end;
+      margin-bottom: 20px;
+    }
+    .cf-btns { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 22px; }
 
-        .summary-boxes {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
+    hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
 
-        .box {
-            flex: 1;
-            min-width: 180px;
-            background: #f8f7f4;
-            padding: 20px;
-            border-radius: 14px;
-            border-left: 5px solid #d4af37;
-        }
+    /* ANALYTICS */
+    .analytics-empty {
+      background: var(--bg-soft);
+      border: 2px dashed var(--cream-mid);
+      border-radius: var(--radius-sm);
+      padding: 52px 24px;
+      text-align: center;
+    }
+    .analytics-empty .big { font-size: 44px; margin-bottom: 12px; }
+    .analytics-empty p { font-size: 15px; color: var(--text-mid); line-height: 1.7; }
 
-        .box h3 {
-            margin-top: 0;
-            color: #0f172a;
-        }
+    /* MENU */
+    .menu-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    .menu-list li {
+      display: flex; align-items: center; gap: 16px;
+      padding: 15px 16px; border-radius: var(--radius-sm);
+      cursor: pointer; border: 1px solid transparent;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .menu-list li:hover { background: var(--bg-soft); border-color: var(--border); }
+    .mi-icon {
+      width: 42px; height: 42px;
+      background: var(--burg-pale);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+    .mi-text strong { display: block; font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+    .mi-text span { font-size: 12px; color: var(--text-soft); }
 
-        table {
-            border-collapse: collapse;
-            background: white;
-        }
+    /* FOOTER */
+    footer {
+      background: var(--bg-soft);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 28px 20px;
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+    footer b { color: var(--burg); }
 
-        th {
-            background: #1e3a8a;
-            color: white;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-        }
-
-        .menu-list li {
-            margin: 10px 0;
-        }
-
-        footer {
-            text-align: center;
-            padding: 25px;
-            color: #555;
-        }
-    </style>
+    /* RESPONSIVE */
+    @media (max-width: 580px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .form-grid .full { grid-column: 1; }
+      .summary-grid { grid-template-columns: 1fr 1fr; }
+      .cf-row { grid-template-columns: 1fr; }
+      nav a { padding: 13px 10px; font-size: 12px; }
+    }
+  </style>
 </head>
-
 <body>
 
-    <header>
-        <h1>Mathai Money Tracker</h1>
-        <p>Personal Expense Tracker</p>
-    </header>
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <p class="eyebrow">Personal Finance</p>
+      <h1>Mathai <span>Money</span> Tracker</h1>
+      <p class="tagline">Track every dollar. Own your financial story.</p>
+    </div>
+  </header>
 
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#cashflow">Cashflow</a>
-        <a href="#expenses">Expenses</a>
-        <a href="#analytics">Analytics</a>
-        <a href="#menu">Menu</a>
-    </nav>
+  <!-- NAV -->
+  <nav>
+    <a href="#home" class="active">Home</a>
+    <a href="#cashflow">Cashflow</a>
+    <a href="#expenses">Expenses</a>
+    <a href="#analytics">Analytics</a>
+    <a href="#menu">Menu</a>
+  </nav>
 
-    <section id="home">
-        <h2>Home</h2>
-        <p>Welcome to your personal money tracking dashboard.</p>
+  <div class="container">
 
-        <div class="summary-boxes">
-            <div class="box">
-                <h3>Total Balance</h3>
-                <p>$0.00</p>
-            </div>
-
-            <div class="box">
-                <h3>Income</h3>
-                <p>$0.00</p>
-            </div>
-
-            <div class="box">
-                <h3>Expenses</h3>
-                <p>$0.00</p>
-            </div>
+    <!-- HOME -->
+    <section class="card" id="home">
+      <div class="card-header">
+        <h2>Dashboard</h2>
+        <p>Welcome back — here's your current financial snapshot.</p>
+      </div>
+      <div class="summary-grid">
+        <div class="sbox">
+          <label>Total Balance</label>
+          <div class="val">$0.00</div>
         </div>
-
-        <div class="quick-buttons">
-            <button>Enter Expense</button>
-            <button>Log Income</button>
-            <button>Tally Bank</button>
+        <div class="sbox inc">
+          <label>Income</label>
+          <div class="val">$0.00</div>
         </div>
+        <div class="sbox exp">
+          <label>Expenses</label>
+          <div class="val">$0.00</div>
+        </div>
+      </div>
+      <div class="quick-row">
+        <a href="#expense"><button class="btn btn-primary">📋 Enter Expense</button></a>
+        <a href="#income"><button class="btn btn-gold">💰 Log Income</button></a>
+        <a href="#bank"><button class="btn btn-soft">🏦 Tally Bank</button></a>
+      </div>
+
+      <div style="margin-top:18px;padding:14px 18px;background:var(--burg-pale);border:1px solid #f0c5c9;border-radius:var(--radius-sm);display:flex;align-items:center;gap:12px;">
+        <span style="font-size:22px;">🏠</span>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:var(--text-mid);margin-bottom:3px;">Fortnightly Rent — $280.00</div>
+          <div id="rent-next-badge" style="font-size:14px;font-weight:700;color:var(--burg);">Calculating...</div>
+        </div>
+        <a href="#rent-schedule" style="margin-left:auto;text-decoration:none;">
+          <button class="btn btn-soft" style="padding:8px 14px;font-size:12px;">View Schedule →</button>
+        </a>
+      </div>
     </section>
 
-    <section id="expense">
+    <!-- ENTER EXPENSE -->
+    <section class="card" id="expense">
+      <div class="card-header">
         <h2>Enter Expense</h2>
-
-        <form>
-            <label>Date:</label>
-            <input type="date">
-
-            <br><br>
-
-            <label>Amount:</label>
-            <input type="number" placeholder="Enter expense amount">
-
-            <br><br>
-
-            <label>Payment Type:</label>
+        <p>Record what you spent, how you paid, and where it went.</p>
+      </div>
+      <form>
+        <div class="form-grid">
+          <div class="fg">
+            <label>Date</label>
+            <input type="date" />
+          </div>
+          <div class="fg">
+            <label>Amount ($)</label>
+            <input type="number" placeholder="0.00" step="0.01" min="0" />
+          </div>
+          <div class="fg">
+            <label>Payment Type</label>
             <select>
-                <option>Cash</option>
-                <option>Card</option>
-                <option>Bank Transfer</option>
+              <option value="">Select type</option>
+              <option>Cash</option>
+              <option>Card</option>
+              <option>Bank Transfer</option>
             </select>
-
-            <br><br>
-
-            <label>Expense Category:</label>
+          </div>
+          <div class="fg">
+            <label>Bank Account</label>
             <select>
-                <option>Rent</option>
-                <option>Outside Food</option>
-                <option>Car</option>
-                <option>Groceries</option>
-                <option>Transport</option>
-                <option>Bills</option>
-                <option>Other</option>
+              <option value="">Select account</option>
+              <option>Commonwealth Bank</option>
+              <option>ANZ</option>
+              <option>NAB</option>
+              <option>Westpac</option>
             </select>
-
-            <br><br>
-
-            <label>Description Optional:</label>
-            <textarea placeholder="Write a short note if needed"></textarea>
-
-            <br><br>
-
-            <button type="submit">Save Expense</button>
-        </form>
+          </div>
+          <div class="fg full">
+            <label>Expense Category</label>
+            <select>
+              <option value="">Select category</option>
+              <option>Rent</option>
+              <option>Outside Food</option>
+              <option>Car</option>
+              <option>Groceries</option>
+              <option>Transport</option>
+              <option>Bills</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="fg full">
+            <label>Description <span class="opt">(optional)</span></label>
+            <textarea placeholder="Add a short note about this expense..."></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Save Expense</button>
+      </form>
     </section>
 
-    <section id="income">
+    <!-- LOG INCOME -->
+    <section class="card" id="income">
+      <div class="card-header">
         <h2>Log Income</h2>
-
-        <form>
-            <label>Date:</label>
-            <input type="date">
-
-            <br><br>
-
-            <label>Amount:</label>
-            <input type="number" placeholder="Enter salary amount">
-
-            <br><br>
-
-            <label>Income Type:</label>
+        <p>Record your earnings, tax withheld, and which account receives the funds.</p>
+      </div>
+      <form>
+        <div class="form-grid">
+          <div class="fg">
+            <label>Date</label>
+            <input type="date" />
+          </div>
+          <div class="fg">
+            <label>Gross Amount ($)</label>
+            <input type="number" placeholder="0.00" step="0.01" min="0" id="inc-gross" oninput="calcNet()" />
+          </div>
+          <div class="fg">
+            <label>Income Type</label>
             <select>
-                <option>Salary</option>
+              <option value="">Select type</option>
+              <option>Salary</option>
+              <option>Freelance</option>
+              <option>Bonus</option>
+              <option>Other</option>
             </select>
-
-            <br><br>
-
-            <label>PAYG:</label>
-            <input type="number" placeholder="Enter PAYG amount">
-
-            <br><br>
-
-            <label>Bank Account to Credit:</label>
-            <input type="text" placeholder="Example: Commonwealth Bank">
-
-            <br><br>
-
-            <button type="submit">Save Income</button>
-        </form>
+          </div>
+          <div class="fg">
+            <label>PAYG Tax Withheld ($)</label>
+            <input type="number" placeholder="0.00" step="0.01" min="0" id="inc-payg" oninput="calcNet()" />
+          </div>
+          <div class="fg">
+            <label>Net Income ($)</label>
+            <input type="number" placeholder="0.00" id="inc-net" readonly style="background:#edf7f2;color:#2a7d4f;font-weight:700;" />
+          </div>
+          <div class="fg">
+            <label>Bank Account to Credit</label>
+            <select>
+              <option value="">Select account</option>
+              <option>Commonwealth Bank</option>
+              <option>ANZ</option>
+              <option>NAB</option>
+              <option>Westpac</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-gold btn-block">Save Income</button>
+      </form>
     </section>
 
-    <section id="bank">
+    <!-- TALLY BANK -->
+    <section class="card" id="bank">
+      <div class="card-header">
         <h2>Tally Bank / Opening Balance</h2>
-
-        <form>
-            <label>Bank Name:</label>
-            <input type="text" placeholder="Example: ANZ">
-
-            <br><br>
-
-            <label>Opening Balance:</label>
-            <input type="number" placeholder="Enter current balance">
-
-            <br><br>
-
-            <button type="submit">Save Bank</button>
-        </form>
+        <p>Add a bank account and set its current balance. These accounts appear in your expense and income forms.</p>
+      </div>
+      <form>
+        <div class="form-grid">
+          <div class="fg">
+            <label>Bank Name</label>
+            <input type="text" placeholder="e.g. Commonwealth Bank" />
+          </div>
+          <div class="fg">
+            <label>Opening Balance ($)</label>
+            <input type="number" placeholder="0.00" step="0.01" min="0" />
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Save Bank Account</button>
+      </form>
     </section>
 
-    <section id="cashflow">
+    <!-- CASHFLOW -->
+    <section class="card" id="cashflow">
+      <div class="card-header">
         <h2>Cashflow</h2>
-        <p>Select a date range to compare inflow and outflow.</p>
-
-        <label>Start Date:</label>
-        <input type="date">
-
-        <br><br>
-
-        <label>End Date:</label>
-        <input type="date">
-
-        <br><br>
-
-        <button>Show Inflow vs Outflow</button>
-        <button>Monthly View</button>
+        <p>Compare your inflow vs outflow across any date range.</p>
+      </div>
+      <div class="cf-row">
+        <div class="fg">
+          <label>Start Date</label>
+          <input type="date" />
+        </div>
+        <div class="fg">
+          <label>End Date</label>
+          <input type="date" />
+        </div>
+        <button class="btn btn-primary" type="button">Show</button>
+      </div>
+      <div class="cf-btns">
+        <button class="btn btn-soft" type="button">📅 This Week</button>
+        <button class="btn btn-soft" type="button">📆 This Month</button>
+        <button class="btn btn-gold" type="button">📊 Monthly View</button>
+      </div>
+      <div class="summary-grid">
+        <div class="sbox inc">
+          <label>Total Inflow</label>
+          <div class="val">$0.00</div>
+        </div>
+        <div class="sbox exp">
+          <label>Total Outflow</label>
+          <div class="val">$0.00</div>
+        </div>
+        <div class="sbox">
+          <label>Net</label>
+          <div class="val">$0.00</div>
+        </div>
+      </div>
     </section>
 
-    <section id="expenses">
-        <h2>Expenses</h2>
-        <p>Your expense records will appear here later.</p>
-
-        <table border="1" width="100%">
+    <!-- EXPENSES TABLE -->
+    <section class="card" id="expenses">
+      <div class="card-header">
+        <h2>Expense Records</h2>
+        <p>All your recorded expenses in one place.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
             <tr>
-                <th>Date</th>
-                <th>Category</th>
-                <th>Payment Type</th>
-                <th>Amount</th>
+              <th>Date</th>
+              <th>Category</th>
+              <th>Payment</th>
+              <th>Bank</th>
+              <th>Amount</th>
             </tr>
-
+          </thead>
+          <tbody>
             <tr>
-                <td>Example</td>
-                <td>Outside Food</td>
-                <td>Card</td>
-                <td>$25</td>
+              <td>13 May 2026</td>
+              <td><span class="badge">Outside Food</span></td>
+              <td>Card</td>
+              <td>Commonwealth</td>
+              <td class="amt neg">$25.00</td>
             </tr>
+            <tr>
+              <td>12 May 2026</td>
+              <td><span class="badge">Groceries</span></td>
+              <td>Cash</td>
+              <td>ANZ</td>
+              <td class="amt neg">$112.50</td>
+            </tr>
+            <tr>
+              <td>10 May 2026</td>
+              <td><span class="badge">Transport</span></td>
+              <td>Card</td>
+              <td>Commonwealth</td>
+              <td class="amt neg">$8.50</td>
+            </tr>
+          </tbody>
         </table>
+      </div>
     </section>
 
-    <section id="analytics">
+    <!-- ANALYTICS -->
+    <section class="card" id="analytics">
+      <div class="card-header">
         <h2>Analytics</h2>
-        <p>Charts and summaries will appear here later once JavaScript is added.</p>
+        <p>Visual summaries and spending patterns.</p>
+      </div>
+      <div class="analytics-empty">
+        <div class="big">📊</div>
+        <p>Charts and breakdowns will appear here<br />once your data is connected.</p>
+      </div>
     </section>
 
-    <section id="menu">
+    <!-- RENT SCHEDULE -->
+    <section class="card" id="rent-schedule">
+      <div class="card-header">
+        <h2>🏠 Fortnightly Rent Schedule</h2>
+        <p>$280.00 every 14 days — showing upcoming payments only, 12 months ahead.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Category</th>
+              <th>Payment Type</th>
+              <th>Amount</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="rent-tbody">
+            <tr><td colspan="5" style="text-align:center;color:var(--text-soft);padding:20px;">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- MENU -->
+    <section class="card" id="menu">
+      <div class="card-header">
         <h2>Menu</h2>
-
-        <ul class="menu-list">
-            <li>Configure Opening Balance</li>
-            <li>Configure Expense Category</li>
-            <li>Configure Income Category</li>
-            <li>Export JSON File</li>
-            <li>Import JSON File</li>
-        </ul>
+        <p>Settings and data management.</p>
+      </div>
+      <ul class="menu-list">
+        <li>
+          <div class="mi-icon">🏦</div>
+          <div class="mi-text">
+            <strong>Configure Opening Balance</strong>
+            <span>Add or update bank accounts and starting balances</span>
+          </div>
+        </li>
+        <li>
+          <div class="mi-icon">🗂️</div>
+          <div class="mi-text">
+            <strong>Configure Expense Categories</strong>
+            <span>Add, edit or remove expense categories</span>
+          </div>
+        </li>
+        <li>
+          <div class="mi-icon">💼</div>
+          <div class="mi-text">
+            <strong>Configure Income Categories</strong>
+            <span>Manage income types and sources</span>
+          </div>
+        </li>
+        <hr />
+        <li>
+          <div class="mi-icon">⬇️</div>
+          <div class="mi-text">
+            <strong>Export Data (JSON)</strong>
+            <span>Download all your records as a backup file</span>
+          </div>
+        </li>
+        <li>
+          <div class="mi-icon">⬆️</div>
+          <div class="mi-text">
+            <strong>Import Data (JSON)</strong>
+            <span>Restore from a previously exported file</span>
+          </div>
+        </li>
+      </ul>
     </section>
 
-    <footer>
-        <p>Mathai Money Tracker © 2026</p>
-    </footer>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Mathai Money Tracker &copy; 2026 &nbsp;·&nbsp; Built by <b>Mathai</b></p>
+  </footer>
+
+  <script>
+    /* ── Today's date on all date inputs ── */
+    const todayStr = new Date().toISOString().split('T')[0];
+    document.querySelectorAll('input[type="date"]').forEach(i => i.value = todayStr);
+
+    /* ── Net income calculator ── */
+    function calcNet() {
+      const gross = parseFloat(document.getElementById('inc-gross').value) || 0;
+      const payg  = parseFloat(document.getElementById('inc-payg').value)  || 0;
+      document.getElementById('inc-net').value = (gross - payg).toFixed(2);
+    }
+
+    /* ── Active nav on scroll ── */
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks  = document.querySelectorAll('nav a');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          const lnk = document.querySelector(`nav a[href="#${e.target.id}"]`);
+          if (lnk) lnk.classList.add('active');
+        }
+      });
+    }, { threshold: 0.45 });
+    sections.forEach(s => obs.observe(s));
+
+    /* ══════════════════════════════════════════
+       FORTNIGHTLY RENT — auto-generate entries
+       Start: 8 May 2025, $280, every 14 days
+    ══════════════════════════════════════════ */
+    const RENT_AMOUNT   = 280;
+    const RENT_START    = new Date('2025-05-08'); // first payment
+    const FORTNIGHT_MS  = 14 * 24 * 60 * 60 * 1000;
+
+    /* Build rent dates from the NEXT upcoming one, 12 months ahead */
+    function getRentDates() {
+      const dates = [];
+      const horizon = new Date();
+      horizon.setMonth(horizon.getMonth() + 12);
+      let d = new Date(RENT_START);
+      /* Fast-forward to the next upcoming date */
+      while (d < new Date()) {
+        d = new Date(d.getTime() + FORTNIGHT_MS);
+      }
+      while (d <= horizon) {
+        dates.push(new Date(d));
+        d = new Date(d.getTime() + FORTNIGHT_MS);
+      }
+      return dates;
+    }
+
+    function fmtDate(d) {
+      return d.toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+
+    function isToday(d) {
+      const t = new Date();
+      return d.getFullYear() === t.getFullYear() &&
+             d.getMonth()    === t.getMonth()    &&
+             d.getDate()     === t.getDate();
+    }
+
+    function isPast(d)    { return d < new Date() && !isToday(d); }
+    function isFuture(d)  { return d > new Date() && !isToday(d); }
+
+    function renderRentTable() {
+      const dates    = getRentDates();
+      const today    = new Date();
+      const nextDue  = dates.find(d => d >= today);
+      const lastPaid = [...dates].reverse().find(d => d < today);
+
+      /* Update next-due badge in dashboard */
+      const badge = document.getElementById('rent-next-badge');
+      if (badge && nextDue) {
+        const daysUntil = Math.ceil((nextDue - today) / (1000 * 60 * 60 * 24));
+        badge.textContent = `Next: ${fmtDate(nextDue)} (${daysUntil === 0 ? 'TODAY' : daysUntil + ' days'})`;
+      }
+
+      /* Build the rent schedule table body */
+      const tbody = document.getElementById('rent-tbody');
+      if (!tbody) return;
+
+      tbody.innerHTML = dates.map((d, i) => {
+        let statusHtml;
+        if (isToday(d)) {
+          statusHtml = `<span class="badge" style="background:#fff3cd;color:#856404;">⚡ Due Today</span>`;
+        } else if (i === 0) {
+          statusHtml = `<span class="badge" style="background:var(--burg-pale);color:var(--burg);">Next Due</span>`;
+        } else {
+          statusHtml = `<span class="badge" style="background:var(--bg-soft);color:var(--text-mid);">Upcoming</span>`;
+        }
+        return `<tr>
+          <td>${fmtDate(d)}</td>
+          <td><span class="badge">Rent</span></td>
+          <td>Bank Transfer</td>
+          <td class="amt neg">$${RENT_AMOUNT.toFixed(2)}</td>
+          <td>${statusHtml}</td>
+        </tr>`;
+      }).join('');
+    }
+
+    renderRentTable();
+  </script>
 
 </body>
 </html>
