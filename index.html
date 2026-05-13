@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Mathai Money Tracker</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>Mathai Money Tracker</h1>
+        <p>Personal Expense Tracker Web App</p>
+    </header>
+
+    <hr>
+
+    <nav>
+        <a href="#home">Home</a> |
+        <a href="#cashflow">Cashflow</a> |
+        <a href="#expenses">Expenses</a> |
+        <a href="#analytics">Analytics</a>
+    </nav>
+
+    <hr>
+
+    <section id="home">
+        <h2>Home</h2>
+
+        <button>Enter Expense</button>
+        <button>Log Income</button>
+        <button>Tally Bank</button>
+    </section>
+
+    <hr>
+
+    <section id="expense">
+        <h2>Enter Expense</h2>
+
+        <form>
+
+            <label>Date:</label><br>
+            <input type="date"><br><br>
+
+            <label>Amount:</label><br>
+            <input type="number"><br><br>
+
+            <label>Payment Type:</label><br>
+            <select>
+                <option>Cash</option>
+                <option>Card</option>
+                <option>Bank Transfer</option>
+            </select><br><br>
+
+            <label>Expense Category:</label><br>
+            <select>
+                <option>Food</option>
+                <option>Transport</option>
+                <option>Shopping</option>
+                <option>Rent</option>
+                <option>Other</option>
+            </select><br><br>
+
+            <label>Description (Optional):</label><br>
+            <textarea></textarea><br><br>
+
+            <button type="submit">Save Expense</button>
+
+        </form>
+    </section>
+
+    <hr>
+
+    <section id="income">
+        <h2>Log Income</h2>
+
+        <form>
+
+            <label>Date:</label><br>
+            <input type="date"><br><br>
+
+            <label>Amount:</label><br>
+            <input type="number"><br><br>
+
+            <label>PAYG:</label><br>
+            <input type="number"><br><br>
+
+            <label>Bank Account to Credit:</label><br>
+            <input type="text"><br><br>
+
+            <button type="submit">Save Income</button>
+
+        </form>
+    </section>
+
+    <hr>
+
+    <section id="bank">
+        <h2>Tally Bank / Opening Balance</h2>
+
+        <form>
+
+            <label>Bank Name:</label><br>
+            <input type="text"><br><br>
+
+            <label>Opening Balance:</label><br>
+            <input type="number"><br><br>
+
+            <button type="submit">Save Bank</button>
+
+        </form>
+    </section>
+
+    <hr>
+
+    <section id="cashflow">
+        <h2>Cashflow</h2>
+
+        <label>Start Date:</label><br>
+        <input type="date"><br><br>
+
+        <label>End Date:</label><br>
+        <input type="date"><br><br>
+
+        <button>Show Inflow vs Outflow</button>
+        <button>Monthly View</button>
+    </section>
+
+    <hr>
+
+    <section id="expenses">
+        <h2>Expenses</h2>
+        <p>Expense records will appear here.</p>
+    </section>
+
+    <hr>
+
+    <section id="analytics">
+        <h2>Analytics</h2>
+        <p>Analytics and charts will appear here later.</p>
+    </section>
+
+    <hr>
+
+    <section id="menu">
+        <h2>Menu</h2>
+
+        <ul>
+            <li>Configure Opening Balance</li>
+            <li>Configure Expense Category</li>
+            <li>Configure Income Category</li>
+            <li>Export JSON File</li>
+            <li>Import JSON File</li>
+        </ul>
+    </section>
+
+</body>
+
+</html>
