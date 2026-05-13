@@ -1,150 +1,270 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Mathai Money Tracker</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #222;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1d2671, #c33764);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        header h1 {
+            font-size: 42px;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        nav {
+            background: white;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #1d2671;
+            font-weight: bold;
+        }
+
+        section {
+            background: white;
+            margin: 25px auto;
+            padding: 25px;
+            max-width: 800px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            color: #1d2671;
+        }
+
+        button {
+            background: #1d2671;
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            margin: 8px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        input, select, textarea {
+            width: 95%;
+            padding: 10px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        textarea {
+            height: 80px;
+        }
+
+        .quick-buttons {
+            text-align: center;
+        }
+
+        .menu-list li {
+            margin: 10px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
 </head>
 
 <body>
 
     <header>
         <h1>Mathai Money Tracker</h1>
-        <p>Personal Expense Tracker Web App</p>
+        <p>Track your income, expenses and cashflow in one place</p>
     </header>
 
-    <hr>
-
     <nav>
-        <a href="#home">Home</a> |
-        <a href="#cashflow">Cashflow</a> |
-        <a href="#expenses">Expenses</a> |
+        <a href="#home">Home</a>
+        <a href="#cashflow">Cashflow</a>
+        <a href="#expenses">Expenses</a>
         <a href="#analytics">Analytics</a>
+        <a href="#menu">Menu</a>
     </nav>
-
-    <hr>
 
     <section id="home">
         <h2>Home</h2>
+        <p>Welcome to your personal money tracking dashboard.</p>
 
-        <button>Enter Expense</button>
-        <button>Log Income</button>
-        <button>Tally Bank</button>
+        <div class="quick-buttons">
+            <button>Enter Expense</button>
+            <button>Log Income</button>
+            <button>Tally Bank</button>
+        </div>
     </section>
-
-    <hr>
 
     <section id="expense">
         <h2>Enter Expense</h2>
 
         <form>
+            <label>Date:</label>
+            <input type="date">
 
-            <label>Date:</label><br>
-            <input type="date"><br><br>
+            <br><br>
 
-            <label>Amount:</label><br>
-            <input type="number"><br><br>
+            <label>Amount:</label>
+            <input type="number" placeholder="Enter expense amount">
 
-            <label>Payment Type:</label><br>
+            <br><br>
+
+            <label>Payment Type:</label>
             <select>
                 <option>Cash</option>
                 <option>Card</option>
                 <option>Bank Transfer</option>
-            </select><br><br>
+            </select>
 
-            <label>Expense Category:</label><br>
+            <br><br>
+
+            <label>Expense Category:</label>
             <select>
-                <option>Food</option>
-                <option>Transport</option>
-                <option>Shopping</option>
                 <option>Rent</option>
+                <option>Outside Food</option>
+                <option>Car</option>
+                <option>Groceries</option>
+                <option>Transport</option>
+                <option>Bills</option>
                 <option>Other</option>
-            </select><br><br>
+            </select>
 
-            <label>Description (Optional):</label><br>
-            <textarea></textarea><br><br>
+            <br><br>
+
+            <label>Description Optional:</label>
+            <textarea placeholder="Write a short note if needed"></textarea>
+
+            <br><br>
 
             <button type="submit">Save Expense</button>
-
         </form>
     </section>
-
-    <hr>
 
     <section id="income">
         <h2>Log Income</h2>
 
         <form>
+            <label>Date:</label>
+            <input type="date">
 
-            <label>Date:</label><br>
-            <input type="date"><br><br>
+            <br><br>
 
-            <label>Amount:</label><br>
-            <input type="number"><br><br>
+            <label>Amount:</label>
+            <input type="number" placeholder="Enter salary amount">
 
-            <label>PAYG:</label><br>
-            <input type="number"><br><br>
+            <br><br>
 
-            <label>Bank Account to Credit:</label><br>
-            <input type="text"><br><br>
+            <label>Income Type:</label>
+            <select>
+                <option>Salary</option>
+            </select>
+
+            <br><br>
+
+            <label>PAYG:</label>
+            <input type="number" placeholder="Enter PAYG amount">
+
+            <br><br>
+
+            <label>Bank Account to Credit:</label>
+            <input type="text" placeholder="Example: Commonwealth Bank">
+
+            <br><br>
 
             <button type="submit">Save Income</button>
-
         </form>
     </section>
-
-    <hr>
 
     <section id="bank">
         <h2>Tally Bank / Opening Balance</h2>
 
         <form>
+            <label>Bank Name:</label>
+            <input type="text" placeholder="Example: ANZ">
 
-            <label>Bank Name:</label><br>
-            <input type="text"><br><br>
+            <br><br>
 
-            <label>Opening Balance:</label><br>
-            <input type="number"><br><br>
+            <label>Opening Balance:</label>
+            <input type="number" placeholder="Enter current balance">
+
+            <br><br>
 
             <button type="submit">Save Bank</button>
-
         </form>
     </section>
 
-    <hr>
-
     <section id="cashflow">
         <h2>Cashflow</h2>
+        <p>Select a date range to compare inflow and outflow.</p>
 
-        <label>Start Date:</label><br>
-        <input type="date"><br><br>
+        <label>Start Date:</label>
+        <input type="date">
 
-        <label>End Date:</label><br>
-        <input type="date"><br><br>
+        <br><br>
+
+        <label>End Date:</label>
+        <input type="date">
+
+        <br><br>
 
         <button>Show Inflow vs Outflow</button>
         <button>Monthly View</button>
     </section>
 
-    <hr>
-
     <section id="expenses">
         <h2>Expenses</h2>
-        <p>Expense records will appear here.</p>
-    </section>
+        <p>Your expense records will appear here later.</p>
 
-    <hr>
+        <table border="1" width="100%" cellpadding="10">
+            <tr>
+                <th>Date</th>
+                <th>Category</th>
+                <th>Payment Type</th>
+                <th>Amount</th>
+            </tr>
+            <tr>
+                <td>Example</td>
+                <td>Outside Food</td>
+                <td>Card</td>
+                <td>$25</td>
+            </tr>
+        </table>
+    </section>
 
     <section id="analytics">
         <h2>Analytics</h2>
-        <p>Analytics and charts will appear here later.</p>
+        <p>Charts and summaries will appear here later once JavaScript is added.</p>
     </section>
-
-    <hr>
 
     <section id="menu">
         <h2>Menu</h2>
 
-        <ul>
+        <ul class="menu-list">
             <li>Configure Opening Balance</li>
             <li>Configure Expense Category</li>
             <li>Configure Income Category</li>
@@ -153,6 +273,9 @@
         </ul>
     </section>
 
-</body>
+    <footer>
+        <p>Mathai Money Tracker © 2026</p>
+    </footer>
 
+</body>
 </html>
