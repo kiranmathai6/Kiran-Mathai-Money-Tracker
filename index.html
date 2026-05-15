@@ -67,7 +67,7 @@
       box-shadow: 0 1px 8px rgba(139,32,53,0.06);
     }
     nav a {
-      display: inline-block; padding: 15px 20px; text-decoration: none;
+      display: inline-block; padding: 15px 14px; text-decoration: none;
       font-size: 13px; font-weight: 700; letter-spacing: 0.5px;
       color: var(--text-soft); border-bottom: 2.5px solid transparent;
       transition: color 0.2s, border-color 0.2s;
@@ -75,29 +75,30 @@
     nav a:hover { color: var(--burg); }
     nav a.active { color: var(--burg); border-bottom-color: var(--burg); }
 
-    .container { max-width: 860px; margin: 0 auto; padding: 32px 20px 80px; display: flex; flex-direction: column; gap: 24px; }
+    .container { max-width: 860px; margin: 0 auto; padding: 24px 16px 80px; display: flex; flex-direction: column; gap: 20px; }
 
-    .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 30px; box-shadow: var(--shadow); }
-    .card-header { margin-bottom: 22px; }
+    .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+    .card-header { margin-bottom: 20px; }
     .card-header h2 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--burg-dk); margin-bottom: 4px; }
     .card-header p { font-size: 14px; color: var(--text-soft); }
 
-    .summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 26px; }
-    .sbox { background: var(--bg-soft); border: 1px solid var(--cream-mid); border-radius: var(--radius-sm); padding: 18px 20px; }
-    .sbox label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text-soft); margin-bottom: 8px; }
-    .sbox .val { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--text); }
+    .summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 22px; }
+    .sbox { background: var(--bg-soft); border: 1px solid var(--cream-mid); border-radius: var(--radius-sm); padding: 16px; }
+    .sbox label { display: block; font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text-soft); margin-bottom: 6px; }
+    .sbox .val { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--text); }
     .sbox.inc { background: var(--success-bg); border-color: #b8deca; }
     .sbox.inc .val { color: var(--success); }
     .sbox.exp { background: var(--danger-bg); border-color: #f0c5c9; }
     .sbox.exp .val { color: var(--danger); }
 
-    .quick-row { display: flex; flex-wrap: wrap; gap: 12px; }
-    .quick-row a { text-decoration: none; }
+    .quick-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .quick-row a { text-decoration: none; flex: 1; min-width: 120px; }
+    .quick-row a .btn { width: 100%; justify-content: center; }
 
     .btn {
-      display: inline-flex; align-items: center; gap: 8px;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
       font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 700;
-      padding: 12px 22px; border: none; border-radius: var(--radius-sm);
+      padding: 12px 18px; border: none; border-radius: var(--radius-sm);
       cursor: pointer; transition: all 0.18s;
     }
     .btn-primary { background: var(--burg); color: #fff; }
@@ -110,8 +111,9 @@
     .btn-danger:hover { background: #fcd5d7; }
     .btn-block { width: 100%; justify-content: center; padding: 14px; font-size: 15px; border-radius: var(--radius-sm); margin-top: 10px; }
 
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    .form-grid .full { grid-column: 1 / -1; }
+    .form-stack { display: flex; flex-direction: column; gap: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
     .fg { display: flex; flex-direction: column; gap: 6px; }
     .fg label { font-size: 12px; font-weight: 700; letter-spacing: 0.7px; text-transform: uppercase; color: var(--text-mid); }
     .fg label .opt { font-weight: 400; font-size: 11px; color: var(--gold); text-transform: none; letter-spacing: 0; margin-left: 4px; }
@@ -126,61 +128,63 @@
       border-color: var(--burg-lt); background: #fff;
       box-shadow: 0 0 0 3px rgba(139,32,53,0.08);
     }
-    .fg textarea { height: 90px; resize: vertical; }
+    .fg textarea { height: 80px; resize: vertical; }
 
     .table-wrap { overflow-x: auto; border-radius: var(--radius-sm); border: 1px solid var(--border); }
     table { width: 100%; border-collapse: collapse; font-size: 14px; }
     thead tr { background: var(--bg-soft); }
-    th { padding: 12px 16px; text-align: left; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-mid); border-bottom: 1px solid var(--border); }
+    th { padding: 11px 14px; text-align: left; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-mid); border-bottom: 1px solid var(--border); }
     tbody tr { border-bottom: 1px solid var(--cream); transition: background 0.12s; }
     tbody tr:last-child { border-bottom: none; }
     tbody tr:hover { background: var(--bg-soft); }
-    td { padding: 12px 16px; color: var(--text); vertical-align: middle; }
-    .badge { display: inline-block; background: var(--burg-pale); color: var(--burg); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
-    .amt { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; }
+    td { padding: 11px 14px; color: var(--text); vertical-align: middle; }
+    .badge { display: inline-block; background: var(--burg-pale); color: var(--burg); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+    .amt { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 600; }
     .amt.neg { color: var(--danger); }
     .amt.pos { color: var(--success); }
     .empty-row td { text-align: center; color: var(--text-soft); padding: 32px 16px; font-size: 14px; }
 
-    .cf-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 14px; align-items: flex-end; margin-bottom: 20px; }
-    .cf-btns { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 22px; }
+    .cf-btns { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+    .cf-btns .btn { flex: 1; min-width: 100px; }
 
-    hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+    hr { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
 
-    .analytics-empty { background: var(--bg-soft); border: 2px dashed var(--cream-mid); border-radius: var(--radius-sm); padding: 52px 24px; text-align: center; }
-    .analytics-empty .big { font-size: 44px; margin-bottom: 12px; }
-    .analytics-empty p { font-size: 15px; color: var(--text-mid); line-height: 1.7; }
+    .analytics-empty { background: var(--bg-soft); border: 2px dashed var(--cream-mid); border-radius: var(--radius-sm); padding: 40px 24px; text-align: center; }
+    .analytics-empty .big { font-size: 40px; margin-bottom: 10px; }
+    .analytics-empty p { font-size: 14px; color: var(--text-mid); line-height: 1.7; }
 
-    .bank-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
-    .bank-item { background: var(--bg-soft); border: 1px solid var(--cream-mid); border-radius: var(--radius-sm); padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; }
+    .bank-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .bank-item { background: var(--bg-soft); border: 1px solid var(--cream-mid); border-radius: var(--radius-sm); padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; }
     .bank-item-name { font-weight: 700; font-size: 15px; color: var(--text); }
     .bank-item-bal { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--burg); margin-top: 2px; }
 
     .toast {
-      position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
       background: var(--burg-dk); color: #fff; padding: 12px 24px;
       border-radius: 30px; font-size: 14px; font-weight: 700;
       box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 999;
-      opacity: 0; transition: opacity 0.3s; pointer-events: none;
+      opacity: 0; transition: opacity 0.3s; pointer-events: none; white-space: nowrap;
     }
     .toast.show { opacity: 1; }
 
     .menu-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
-    .menu-list li { display: flex; align-items: center; gap: 16px; padding: 15px 16px; border-radius: var(--radius-sm); cursor: pointer; border: 1px solid transparent; transition: background 0.15s, border-color 0.15s; }
+    .menu-list li { display: flex; align-items: center; gap: 14px; padding: 14px; border-radius: var(--radius-sm); cursor: pointer; border: 1px solid transparent; transition: background 0.15s, border-color 0.15s; }
     .menu-list li:hover { background: var(--bg-soft); border-color: var(--border); }
-    .mi-icon { width: 42px; height: 42px; background: var(--burg-pale); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .mi-icon { width: 40px; height: 40px; background: var(--burg-pale); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
     .mi-text strong { display: block; font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
     .mi-text span { font-size: 12px; color: var(--text-soft); }
 
-    footer { background: var(--bg-soft); border-top: 1px solid var(--border); text-align: center; padding: 28px 20px; font-size: 13px; color: var(--text-soft); }
+    footer { background: var(--bg-soft); border-top: 1px solid var(--border); text-align: center; padding: 24px 20px; font-size: 13px; color: var(--text-soft); }
     footer b { color: var(--burg); }
 
+    /* MOBILE */
     @media (max-width: 580px) {
-      .form-grid { grid-template-columns: 1fr; }
-      .form-grid .full { grid-column: 1; }
       .summary-grid { grid-template-columns: 1fr 1fr; }
-      .cf-row { grid-template-columns: 1fr; }
-      nav a { padding: 13px 10px; font-size: 12px; }
+      .sbox .val { font-size: 18px; }
+      .form-row { grid-template-columns: 1fr; }
+      nav a { padding: 13px 8px; font-size: 11px; letter-spacing: 0; }
+      .card { padding: 18px; }
+      th, td { padding: 9px 10px; font-size: 12px; }
     }
   </style>
 </head>
@@ -229,14 +233,14 @@
         <a href="#income"><button class="btn btn-gold">💰 Log Income</button></a>
         <a href="#bank"><button class="btn btn-soft">🏦 Tally Bank</button></a>
       </div>
-      <div style="margin-top:18px;padding:14px 18px;background:var(--burg-pale);border:1px solid #f0c5c9;border-radius:var(--radius-sm);display:flex;align-items:center;gap:12px;">
-        <span style="font-size:22px;">🏠</span>
-        <div>
+      <div style="margin-top:16px;padding:14px 16px;background:var(--burg-pale);border:1px solid #f0c5c9;border-radius:var(--radius-sm);display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <span style="font-size:20px;">🏠</span>
+        <div style="flex:1;min-width:160px;">
           <div style="font-size:11px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:var(--text-mid);margin-bottom:3px;">Fortnightly Rent — $280.00</div>
           <div id="rent-next-badge" style="font-size:14px;font-weight:700;color:var(--burg);">Calculating...</div>
         </div>
-        <a href="#rent-schedule" style="margin-left:auto;text-decoration:none;">
-          <button class="btn btn-soft" style="padding:8px 14px;font-size:12px;">View Schedule →</button>
+        <a href="#rent-schedule" style="text-decoration:none;">
+          <button class="btn btn-soft" style="padding:8px 14px;font-size:12px;">View →</button>
         </a>
       </div>
     </section>
@@ -245,25 +249,23 @@
     <section class="card" id="expense">
       <div class="card-header">
         <h2>Enter Expense</h2>
-        <p>Record what you spent, how you paid, and where it went.</p>
+        <p>Record what you spent and where it went.</p>
       </div>
       <form id="expense-form">
-        <div class="form-grid">
-          <div class="fg">
-            <label>Date</label>
-            <input type="date" id="exp-date" required />
+        <div class="form-stack">
+          <div class="form-row">
+            <div class="fg">
+              <label>Date</label>
+              <input type="date" id="exp-date" required />
+            </div>
+            <div class="fg">
+              <label>Amount ($)</label>
+              <input type="number" id="exp-amount" placeholder="0.00" step="0.01" min="0.01" required />
+            </div>
           </div>
           <div class="fg">
-            <label>Amount ($)</label>
-            <input type="number" id="exp-amount" placeholder="0.00" step="0.01" min="0.01" required />
-          </div>
-          <div class="fg">
-           <label>Payment Type</label>
-           <input type="text" id="exp-payment" value="Card" readonly style="background:#edf7f2;color:#2a7d4f;font-weight:700;cursor:default;" />
-          </div>
-        
-              <option>Card</option>
-            </select>
+            <label>Payment Type</label>
+            <input type="text" value="Card" readonly style="color:#2a7d4f;font-weight:700;background:#edf7f2;cursor:default;" />
           </div>
           <div class="fg">
             <label>Bank Account</label>
@@ -271,7 +273,7 @@
               <option value="">Select account</option>
             </select>
           </div>
-          <div class="fg full">
+          <div class="fg">
             <label>Expense Category</label>
             <select id="exp-category" required>
               <option value="">Select category</option>
@@ -285,9 +287,9 @@
               <option>Other</option>
             </select>
           </div>
-          <div class="fg full">
+          <div class="fg">
             <label>Description <span class="opt">(optional)</span></label>
-            <textarea id="exp-desc" placeholder="Add a short note about this expense..."></textarea>
+            <textarea id="exp-desc" placeholder="Add a short note..."></textarea>
           </div>
         </div>
         <button type="submit" class="btn btn-primary btn-block">Save Expense</button>
@@ -298,17 +300,19 @@
     <section class="card" id="income">
       <div class="card-header">
         <h2>Log Income</h2>
-        <p>Record your earnings, tax withheld, and which account receives the funds.</p>
+        <p>Record your earnings and which account receives the funds.</p>
       </div>
       <form id="income-form">
-        <div class="form-grid">
-          <div class="fg">
-            <label>Date</label>
-            <input type="date" id="inc-date" required />
-          </div>
-          <div class="fg">
-            <label>Gross Amount ($)</label>
-            <input type="number" id="inc-gross" placeholder="0.00" step="0.01" min="0.01" required oninput="calcNet()" />
+        <div class="form-stack">
+          <div class="form-row">
+            <div class="fg">
+              <label>Date</label>
+              <input type="date" id="inc-date" required />
+            </div>
+            <div class="fg">
+              <label>Amount ($)</label>
+              <input type="number" id="inc-gross" placeholder="0.00" step="0.01" min="0.01" required />
+            </div>
           </div>
           <div class="fg">
             <label>Income Type</label>
@@ -319,14 +323,6 @@
               <option>Bonus</option>
               <option>Other</option>
             </select>
-          </div>
-          <div class="fg">
-            <label>PAYG Tax Withheld ($)</label>
-            <input type="number" id="inc-payg" placeholder="0.00" step="0.01" min="0" oninput="calcNet()" />
-          </div>
-          <div class="fg">
-            <label>Net Income ($)</label>
-            <input type="number" id="inc-net" placeholder="0.00" readonly style="background:#edf7f2;color:#2a7d4f;font-weight:700;" />
           </div>
           <div class="fg">
             <label>Bank Account to Credit</label>
@@ -347,14 +343,16 @@
       </div>
       <div class="bank-list" id="bank-list"></div>
       <form id="bank-form">
-        <div class="form-grid">
-          <div class="fg">
-            <label>Bank Name</label>
-            <input type="text" id="bank-name" placeholder="e.g. Commonwealth Bank" required />
-          </div>
-          <div class="fg">
-            <label>Opening Balance ($)</label>
-            <input type="number" id="bank-balance" placeholder="0.00" step="0.01" min="0" required />
+        <div class="form-stack">
+          <div class="form-row">
+            <div class="fg">
+              <label>Bank Name</label>
+              <input type="text" id="bank-name" placeholder="e.g. Commonwealth Bank" required />
+            </div>
+            <div class="fg">
+              <label>Opening Balance ($)</label>
+              <input type="number" id="bank-balance" placeholder="0.00" step="0.01" min="0" required />
+            </div>
           </div>
         </div>
         <button type="submit" class="btn btn-primary btn-block">Save Bank Account</button>
@@ -365,31 +363,33 @@
     <section class="card" id="cashflow">
       <div class="card-header">
         <h2>Cashflow</h2>
-        <p>Compare your inflow vs outflow across any date range.</p>
-      </div>
-      <div class="cf-row">
-        <div class="fg">
-          <label>Start Date</label>
-          <input type="date" id="cf-start" />
-        </div>
-        <div class="fg">
-          <label>End Date</label>
-          <input type="date" id="cf-end" />
-        </div>
-        <button class="btn btn-primary" type="button" onclick="runCashflow()">Show</button>
+        <p>Compare your inflow vs outflow.</p>
       </div>
       <div class="cf-btns">
         <button class="btn btn-soft" type="button" onclick="cfPreset('week')">📅 This Week</button>
         <button class="btn btn-soft" type="button" onclick="cfPreset('month')">📆 This Month</button>
         <button class="btn btn-soft" type="button" onclick="cfPreset('year')">📊 This Year</button>
       </div>
+      <div class="form-stack" style="margin-bottom:16px;">
+        <div class="form-row">
+          <div class="fg">
+            <label>Start Date</label>
+            <input type="date" id="cf-start" />
+          </div>
+          <div class="fg">
+            <label>End Date</label>
+            <input type="date" id="cf-end" />
+          </div>
+        </div>
+        <button class="btn btn-primary btn-block" type="button" onclick="runCashflow()">Show Cashflow</button>
+      </div>
       <div class="summary-grid">
         <div class="sbox inc">
-          <label>Total Inflow</label>
+          <label>Inflow</label>
           <div class="val" id="cf-inflow">$0.00</div>
         </div>
         <div class="sbox exp">
-          <label>Total Outflow</label>
+          <label>Outflow</label>
           <div class="val" id="cf-outflow">$0.00</div>
         </div>
         <div class="sbox">
@@ -411,7 +411,6 @@
             <tr>
               <th>Date</th>
               <th>Category</th>
-              <th>Payment</th>
               <th>Bank</th>
               <th>Amount</th>
               <th>Note</th>
@@ -419,7 +418,7 @@
             </tr>
           </thead>
           <tbody id="expense-table-body">
-            <tr class="empty-row"><td colspan="7">No expenses recorded yet.</td></tr>
+            <tr class="empty-row"><td colspan="6">No expenses recorded yet.</td></tr>
           </tbody>
         </table>
       </div>
@@ -437,15 +436,13 @@
             <tr>
               <th>Date</th>
               <th>Type</th>
-              <th>Gross</th>
-              <th>PAYG</th>
-              <th>Net</th>
+              <th>Amount</th>
               <th>Bank</th>
               <th></th>
             </tr>
           </thead>
           <tbody id="income-table-body">
-            <tr class="empty-row"><td colspan="7">No income recorded yet.</td></tr>
+            <tr class="empty-row"><td colspan="5">No income recorded yet.</td></tr>
           </tbody>
         </table>
       </div>
@@ -469,7 +466,7 @@
     <section class="card" id="rent-schedule">
       <div class="card-header">
         <h2>🏠 Fortnightly Rent Schedule</h2>
-        <p>$280.00 every 14 days — upcoming payments only, 12 months ahead.</p>
+        <p>$280.00 every 14 days — upcoming payments, 12 months ahead.</p>
       </div>
       <div class="table-wrap">
         <table>
@@ -477,13 +474,12 @@
             <tr>
               <th>Date</th>
               <th>Category</th>
-              <th>Payment Type</th>
               <th>Amount</th>
               <th>Status</th>
             </tr>
           </thead>
           <tbody id="rent-tbody">
-            <tr><td colspan="5" style="text-align:center;color:var(--text-soft);padding:20px;">Loading...</td></tr>
+            <tr><td colspan="4" style="text-align:center;color:var(--text-soft);padding:20px;">Loading...</td></tr>
           </tbody>
         </table>
       </div>
@@ -500,21 +496,7 @@
           <div class="mi-icon">🏦</div>
           <div class="mi-text">
             <strong>Configure Opening Balance</strong>
-            <span>Add or update bank accounts and starting balances</span>
-          </div>
-        </li>
-        <li>
-          <div class="mi-icon">🗂️</div>
-          <div class="mi-text">
-            <strong>Configure Expense Categories</strong>
-            <span>Add, edit or remove expense categories</span>
-          </div>
-        </li>
-        <li>
-          <div class="mi-icon">💼</div>
-          <div class="mi-text">
-            <strong>Configure Income Categories</strong>
-            <span>Manage income types and sources</span>
+            <span>Add or update bank accounts and balances</span>
           </div>
         </li>
         <hr />
@@ -578,12 +560,6 @@
   function todayISO() { return new Date().toISOString().split('T')[0]; }
 
   document.querySelectorAll('input[type="date"]').forEach(i => i.value = todayISO());
-
-  function calcNet() {
-    const gross = parseFloat(document.getElementById('inc-gross').value) || 0;
-    const payg  = parseFloat(document.getElementById('inc-payg').value)  || 0;
-    document.getElementById('inc-net').value = (gross - payg).toFixed(2);
-  }
 
   function populateBankDropdowns() {
     const data = loadData();
@@ -649,13 +625,12 @@
     e.preventDefault();
     const date     = document.getElementById('exp-date').value;
     const amount   = parseFloat(document.getElementById('exp-amount').value);
-    const payment  = document.getElementById('exp-payment').value;
     const bank     = document.getElementById('exp-bank').value;
     const category = document.getElementById('exp-category').value;
     const desc     = document.getElementById('exp-desc').value.trim();
-    if (!date || !amount || !payment || !category) { showToast('Please fill in all required fields.'); return; }
+    if (!date || !amount || !category) { showToast('Please fill in all required fields.'); return; }
     const data = loadData();
-    data.expenses.push({ id: Date.now(), date, amount, payment, bank, category, desc });
+    data.expenses.push({ id: Date.now(), date, amount, payment: 'Card', bank, category, desc });
     saveData(data);
     showToast('Expense saved! ✓');
     this.reset();
@@ -680,37 +655,33 @@
     const tbody = document.getElementById('expense-table-body');
     const rows = [...data.expenses].sort((a, b) => new Date(b.date) - new Date(a.date));
     if (!rows.length) {
-      tbody.innerHTML = '<tr class="empty-row"><td colspan="7">No expenses recorded yet.</td></tr>';
+      tbody.innerHTML = '<tr class="empty-row"><td colspan="6">No expenses recorded yet.</td></tr>';
       return;
     }
     tbody.innerHTML = rows.map(r => `
       <tr>
         <td>${fmtDateDisplay(r.date)}</td>
         <td><span class="badge">${r.category}</span></td>
-        <td>${r.payment}</td>
         <td>${r.bank || '—'}</td>
         <td class="amt neg">${fmt(r.amount)}</td>
-        <td style="color:var(--text-soft);font-size:13px;">${r.desc || '—'}</td>
+        <td style="color:var(--text-soft);font-size:12px;">${r.desc || '—'}</td>
         <td><button class="btn btn-danger" onclick="deleteExpense(${r.id})">✕</button></td>
       </tr>`).join('');
   }
 
   document.getElementById('income-form').addEventListener('submit', function(e) {
     e.preventDefault();
-    const date  = document.getElementById('inc-date').value;
-    const gross = parseFloat(document.getElementById('inc-gross').value);
-    const type  = document.getElementById('inc-type').value;
-    const payg  = parseFloat(document.getElementById('inc-payg').value) || 0;
-    const net   = gross - payg;
-    const bank  = document.getElementById('inc-bank').value;
-    if (!date || !gross || !type) { showToast('Please fill in all required fields.'); return; }
+    const date   = document.getElementById('inc-date').value;
+    const amount = parseFloat(document.getElementById('inc-gross').value);
+    const type   = document.getElementById('inc-type').value;
+    const bank   = document.getElementById('inc-bank').value;
+    if (!date || !amount || !type) { showToast('Please fill in all required fields.'); return; }
     const data = loadData();
-    data.incomes.push({ id: Date.now(), date, gross, payg, net, type, bank });
+    data.incomes.push({ id: Date.now(), date, gross: amount, payg: 0, net: amount, type, bank });
     saveData(data);
     showToast('Income saved! ✓');
     this.reset();
     document.getElementById('inc-date').value = todayISO();
-    document.getElementById('inc-net').value = '';
     renderIncomeTable();
     updateDashboard();
   });
@@ -729,15 +700,13 @@
     const tbody = document.getElementById('income-table-body');
     const rows = [...data.incomes].sort((a, b) => new Date(b.date) - new Date(a.date));
     if (!rows.length) {
-      tbody.innerHTML = '<tr class="empty-row"><td colspan="7">No income recorded yet.</td></tr>';
+      tbody.innerHTML = '<tr class="empty-row"><td colspan="5">No income recorded yet.</td></tr>';
       return;
     }
     tbody.innerHTML = rows.map(r => `
       <tr>
         <td>${fmtDateDisplay(r.date)}</td>
         <td><span class="badge" style="background:var(--success-bg);color:var(--success);">${r.type}</span></td>
-        <td class="amt">${fmt(r.gross)}</td>
-        <td style="color:var(--danger);">${fmt(r.payg)}</td>
         <td class="amt pos">${fmt(r.net)}</td>
         <td>${r.bank || '—'}</td>
         <td><button class="btn btn-danger" onclick="deleteIncome(${r.id})">✕</button></td>
@@ -800,7 +769,7 @@
     data.expenses.forEach(e => { totals[e.category] = (totals[e.category] || 0) + e.amount; });
     const grand  = Object.values(totals).reduce((s, v) => s + v, 0);
     const sorted = Object.entries(totals).sort((a, b) => b[1] - a[1]);
-    container.innerHTML = '<div style="display:flex;flex-direction:column;gap:10px;">' +
+    container.innerHTML = '<div style="display:flex;flex-direction:column;gap:12px;">' +
       sorted.map(([cat, amt], i) => {
         const pct   = ((amt / grand) * 100).toFixed(1);
         const color = CAT_COLORS[i % CAT_COLORS.length];
@@ -810,7 +779,7 @@
             '<span style="font-size:13px;color:var(--text-mid);">' + fmt(amt) + ' <span style="color:var(--text-soft);">(' + pct + '%)</span></span>' +
           '</div>' +
           '<div style="background:var(--cream-mid);border-radius:6px;height:10px;overflow:hidden;">' +
-            '<div style="width:' + pct + '%;height:100%;background:' + color + ';border-radius:6px;transition:width 0.4s;"></div>' +
+            '<div style="width:' + pct + '%;height:100%;background:' + color + ';border-radius:6px;"></div>' +
           '</div></div>';
       }).join('') +
       '<div style="margin-top:8px;padding-top:12px;border-top:1px solid var(--border);display:flex;justify-content:space-between;">' +
@@ -838,7 +807,7 @@
     reader.onload = function(e) {
       try {
         const imported = JSON.parse(e.target.result);
-        if (!imported.expenses || !imported.incomes) throw new Error('Invalid file');
+        if (!imported.expenses || !imported.incomes) throw new Error('Invalid');
         saveData(imported);
         init();
         showToast('Data imported successfully!');
@@ -893,7 +862,7 @@
       } else {
         statusHtml = '<span class="badge" style="background:var(--bg-soft);color:var(--text-mid);">Upcoming</span>';
       }
-      return '<tr><td>' + fmtDate(d) + '</td><td><span class="badge">Rent</span></td><td>Bank Transfer</td><td class="amt neg">$' + RENT_AMOUNT.toFixed(2) + '</td><td>' + statusHtml + '</td></tr>';
+      return '<tr><td>' + fmtDate(d) + '</td><td><span class="badge">Rent</span></td><td class="amt neg">$' + RENT_AMOUNT.toFixed(2) + '</td><td>' + statusHtml + '</td></tr>';
     }).join('');
   }
 
