@@ -525,7 +525,9 @@
   const STORE_KEY = 'mathai_v2';
 
   const DEFAULT_EXPENSE_CATS = ['Rent','Outside Food','Car','Groceries','Transport','Bills','Shopping','Investment','Other'];
-  const DEFAULT_INCOME_CATS  = ['PAYG','Freelance','Interest','Bonus','Other'];
+  const DEFAULT_INCOME_CATS  = ['Salary'];
+
+  const DEFAULT_BANK_NAME = 'Commonwealth Bank';
 
   function loadData() {
     try {
@@ -537,13 +539,22 @@
         d.incomes = d.incomes || [];
         d.expenseCategories = d.expenseCategories || DEFAULT_EXPENSE_CATS.slice();
         d.incomeCategories  = d.incomeCategories  || DEFAULT_INCOME_CATS.slice();
+        if (!localStorage.getItem('mathai_salary_only_migrated')) {
+          d.incomeCategories = ['Salary'];
+          localStorage.setItem('mathai_salary_only_migrated', '1');
+          localStorage.setItem(STORE_KEY, JSON.stringify(d));
+        }
         d.recurring = d.recurring || [];
         if (!d.expenseCategories.some(c => c.toLowerCase() === 'investment')) d.expenseCategories.push('Investment');
         d.banks.forEach(b => { if (b.opening === undefined) b.opening = b.balance || 0; });
+        if (!d.banks.length) { d.banks.push({ name: DEFAULT_BANK_NAME, opening: 0 }); localStorage.setItem(STORE_KEY, JSON.stringify(d)); }
         return d;
       }
     } catch(e) { /* fall through to fresh data */ }
-    return { banks: [], expenses: [], incomes: [], expenseCategories: DEFAULT_EXPENSE_CATS.slice(), incomeCategories: DEFAULT_INCOME_CATS.slice(), recurring: [] };
+    const fresh = { banks: [{ name: DEFAULT_BANK_NAME, opening: 0 }], expenses: [], incomes: [], expenseCategories: DEFAULT_EXPENSE_CATS.slice(), incomeCategories: DEFAULT_INCOME_CATS.slice(), recurring: [] };
+    localStorage.setItem('mathai_salary_only_migrated', '1');
+    localStorage.setItem(STORE_KEY, JSON.stringify(fresh));
+    return fresh;
   }
 
   function saveData(data) { localStorage.setItem(STORE_KEY, JSON.stringify(data)); }
