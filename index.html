@@ -328,7 +328,7 @@
             <div class="fg"><label>Date</label><input type="date" id="exp-date" required /></div>
             <div class="fg"><label>Amount</label><input type="number" id="exp-amount" placeholder="0.00" step="0.01" min="0.01" required /></div>
           </div>
-          <div class="fg">
+          <div class="fg" id="exp-bank-field">
             <label>Payment type</label>
             <select id="exp-bank" required><option value="">Select account</option></select>
           </div>
@@ -370,7 +370,7 @@
             <label>Category</label>
             <select id="inc-type" required><option value="">Select category</option></select>
           </div>
-          <div class="fg">
+          <div class="fg" id="inc-bank-field">
             <label>Bank account credited</label>
             <select id="inc-bank" required><option value="">Select account</option></select>
           </div>
@@ -473,7 +473,7 @@
               <label>Category</label>
               <select id="rec-category" required><option value="">Select category</option></select>
             </div>
-            <div class="fg">
+            <div class="fg" id="rec-bank-field">
               <label>Payment type</label>
               <select id="rec-bank" required><option value="">Select account</option></select>
             </div>
@@ -602,16 +602,15 @@
 
   function populateBankDropdowns() {
     const data = loadData();
+    const onlyOne = data.banks.length === 1;
     ['exp-bank', 'inc-bank'].forEach(id => {
       const sel = document.getElementById(id);
       const cur = sel.value;
-      sel.innerHTML = '<option value="">Select account</option>';
-      data.banks.forEach(b => {
-        const o = document.createElement('option');
-        o.value = b.name; o.textContent = b.name;
-        sel.appendChild(o);
-      });
-      sel.value = cur;
+      sel.innerHTML = (onlyOne ? '' : '<option value="">Select account</option>') +
+        data.banks.map(b => `<option value="${b.name}">${b.name}</option>`).join('');
+      sel.value = cur || (onlyOne ? data.banks[0].name : '');
+      const field = document.getElementById(id + '-field');
+      if (field) field.style.display = onlyOne ? 'none' : 'flex';
     });
   }
 
@@ -625,9 +624,10 @@
 
     const incSel = document.getElementById('inc-type');
     const curInc = incSel.value;
-    incSel.innerHTML = '<option value="">Select category</option>' +
+    const onlyOneInc = data.incomeCategories.length === 1;
+    incSel.innerHTML = (onlyOneInc ? '' : '<option value="">Select category</option>') +
       data.incomeCategories.map(c => `<option>${c}</option>`).join('');
-    incSel.value = curInc;
+    incSel.value = curInc || (onlyOneInc ? data.incomeCategories[0] : '');
   }
 
   function renderBankList() {
@@ -741,7 +741,12 @@
     const catSel = document.getElementById('rec-category');
     catSel.innerHTML = '<option value="">Select category</option>' + data.expenseCategories.map(c => `<option>${c}</option>`).join('');
     const bankSel = document.getElementById('rec-bank');
-    bankSel.innerHTML = '<option value="">Select account</option>' + data.banks.map(b => `<option value="${b.name}">${b.name}</option>`).join('');
+    const onlyOne = data.banks.length === 1;
+    bankSel.innerHTML = (onlyOne ? '' : '<option value="">Select account</option>') +
+      data.banks.map(b => `<option value="${b.name}">${b.name}</option>`).join('');
+    bankSel.value = onlyOne ? data.banks[0].name : '';
+    const field = document.getElementById('rec-bank-field');
+    if (field) field.style.display = onlyOne ? 'none' : 'flex';
   }
 
   function renderRecurring() {
