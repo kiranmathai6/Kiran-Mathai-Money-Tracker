@@ -262,6 +262,10 @@
         <div class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36M21 3v6h-6"/></svg></div>
         <div class="mi-text"><strong>Recurring expenses</strong><span>Rent and other repeating costs</span></div>
       </li>
+      <li onclick="openPage('connection'); closeDrawer();">
+        <div class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg></div>
+        <div class="mi-text"><strong>Supabase connection</strong><span id="conn-status-label">Not connected — using this device only</span></div>
+      </li>
       <li onclick="exportData()">
         <div class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 21h16"/></svg></div>
         <div class="mi-text"><strong>Export data</strong><span>Download all records as JSON</span></div>
@@ -490,6 +494,25 @@
     </section>
   </div>
 
+  <!-- SUPABASE CONNECTION -->
+  <div class="container" id="page-connection">
+    <section class="card">
+      <div class="card-header"><h2>Supabase connection</h2><p>Sync your data to the cloud so it's the same on every device.</p></div>
+      <p style="font-size:13px;color:var(--ink-mid);line-height:1.6;margin-bottom:16px;">
+        Run <code style="background:var(--bg-soft);padding:1px 5px;border-radius:4px;">supabase-schema.sql</code> in your Supabase project's SQL Editor first, then paste your Project URL and anon public key below (Project Settings → API).
+      </p>
+      <form id="connection-form">
+        <div class="form-stack">
+          <div class="fg"><label>Project URL</label><input type="text" id="conn-url" placeholder="https://xxxx.supabase.co" /></div>
+          <div class="fg"><label>Anon public key</label><input type="text" id="conn-key" placeholder="eyJhbGciOi..." /></div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Save &amp; connect</button>
+      </form>
+      <p id="conn-status" style="font-size:13px;color:var(--ink-mid);margin-top:14px;">Status: not connected.</p>
+      <button class="btn btn-soft btn-block" type="button" id="conn-disconnect-btn" style="display:none;" onclick="disconnectSupabase()">Disconnect (keep using this device only)</button>
+    </section>
+  </div>
+
   <!-- CATEGORIES CONFIG -->
   <div class="container" id="page-categories">
     <section class="card">
@@ -523,11 +546,117 @@
 
   <div class="toast" id="toast"></div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
   const STORE_KEY = 'mathai_v2';
+  const CONN_KEY = 'mathai_supabase_conn';
 
   const DEFAULT_EXPENSE_CATS = ['Rent','Outside Food','Car','Groceries','Transport','Bills','Shopping','Investment','Other'];
   const DEFAULT_INCOME_CATS  = ['Salary'];
+
+  /* ---------- Supabase connection ---------- */
+  let supa = null;
+  function getConn() { try { return JSON.parse(localStorage.getItem(CONN_KEY) || 'null'); } catch { return null; } }
+  function initSupabaseClient() {
+    const c = getConn();
+    if (c && c.url && c.key && window.supabase) {
+      try { supa = window.supabase.createClient(c.url, c.key); } catch { supa = null; }
+    } else {
+      supa = null;
+    }
+  }
+
+  async function pullFromSupabase() {
+    if (!supa) return;
+    try {
+      const [banksR, expCatR, incCatR, expR, incR, recR] = await Promise.all([
+        supa.from('banks').select('*'),
+        supa.from('expense_categories').select('*'),
+        supa.from('income_categories').select('*'),
+        supa.from('expenses').select('*'),
+        supa.from('income').select('*'),
+        supa.from('recurring_expenses').select('*'),
+      ]);
+      [banksR, expCatR, incCatR, expR, incR, recR].forEach(r => { if (r.error) throw r.error; });
+      const data = {
+        banks: (banksR.data || []).map(b => ({ name: b.name, opening: Number(b.opening) })),
+        expenseCategories: (expCatR.data || []).map(c => c.name),
+        incomeCategories: (incCatR.data || []).map(c => c.name),
+        expenses: (expR.data || []).map(e => ({ id: e.id, date: e.date, amount: Number(e.amount), bank: e.bank, category: e.category, desc: e.description, recurringId: e.recurring_id || undefined })),
+        incomes: (incR.data || []).map(i => ({ id: i.id, date: i.date, amount: Number(i.amount), type: i.category, bank: i.bank })),
+        recurring: (recR.data || []).map(r => ({ id: r.id, name: r.name, amount: Number(r.amount), category: r.category, bank: r.bank, dayOfMonth: r.day_of_month })),
+      };
+      localStorage.setItem(STORE_KEY, JSON.stringify(data));
+    } catch (err) {
+      showToast('Could not load from Supabase: ' + err.message);
+    }
+  }
+
+  async function pushToSupabase() {
+    if (!supa) return;
+    const data = loadData();
+    try {
+      await supa.from('banks').delete().neq('name', '');
+      if (data.banks.length) { const r = await supa.from('banks').insert(data.banks.map(b => ({ name: b.name, opening: b.opening }))); if (r.error) throw r.error; }
+
+      await supa.from('expense_categories').delete().neq('name', '');
+      if (data.expenseCategories.length) { const r = await supa.from('expense_categories').insert(data.expenseCategories.map(name => ({ name }))); if (r.error) throw r.error; }
+
+      await supa.from('income_categories').delete().neq('name', '');
+      if (data.incomeCategories.length) { const r = await supa.from('income_categories').insert(data.incomeCategories.map(name => ({ name }))); if (r.error) throw r.error; }
+
+      await supa.from('expenses').delete().neq('id', -1);
+      if (data.expenses.length) { const r = await supa.from('expenses').insert(data.expenses.map(e => ({ id: e.id, date: e.date, amount: e.amount, bank: e.bank, category: e.category, description: e.desc || null, recurring_id: e.recurringId || null }))); if (r.error) throw r.error; }
+
+      await supa.from('income').delete().neq('id', -1);
+      if (data.incomes.length) { const r = await supa.from('income').insert(data.incomes.map(i => ({ id: i.id, date: i.date, amount: i.amount, category: i.type, bank: i.bank }))); if (r.error) throw r.error; }
+
+      await supa.from('recurring_expenses').delete().neq('id', '');
+      if (data.recurring.length) { const r = await supa.from('recurring_expenses').insert(data.recurring.map(r => ({ id: r.id, name: r.name, amount: r.amount, category: r.category, bank: r.bank, day_of_month: r.dayOfMonth }))); if (r.error) throw r.error; }
+    } catch (err) {
+      showToast('Sync to Supabase failed: ' + err.message);
+    }
+  }
+
+  function updateConnStatusUI() {
+    const c = getConn();
+    const label = document.getElementById('conn-status-label');
+    const status = document.getElementById('conn-status');
+    const disconnectBtn = document.getElementById('conn-disconnect-btn');
+    const urlInput = document.getElementById('conn-url');
+    const keyInput = document.getElementById('conn-key');
+    if (c && urlInput && !urlInput.value) urlInput.value = c.url;
+    if (c && keyInput && !keyInput.value) keyInput.value = c.key;
+    if (c && supa) {
+      if (label) label.textContent = 'Connected — synced to Supabase';
+      if (status) status.textContent = 'Status: connected to ' + c.url;
+      if (disconnectBtn) disconnectBtn.style.display = 'block';
+    } else {
+      if (label) label.textContent = 'Not connected — using this device only';
+      if (status) status.textContent = 'Status: not connected.';
+      if (disconnectBtn) disconnectBtn.style.display = 'none';
+    }
+  }
+
+  document.getElementById('connection-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const url = document.getElementById('conn-url').value.trim();
+    const key = document.getElementById('conn-key').value.trim();
+    if (!url || !key) { showToast('Enter both the URL and the key'); return; }
+    localStorage.setItem(CONN_KEY, JSON.stringify({ url, key }));
+    initSupabaseClient();
+    showToast('Connecting…');
+    await pushToSupabase();
+    updateConnStatusUI();
+    showToast('Connected — your data is now uploaded');
+  });
+
+  function disconnectSupabase() {
+    localStorage.removeItem(CONN_KEY);
+    supa = null;
+    updateConnStatusUI();
+    showToast('Disconnected — back to this device only');
+  }
 
   const DEFAULT_BANK_NAME = 'Commonwealth Bank';
 
@@ -559,7 +688,10 @@
     return fresh;
   }
 
-  function saveData(data) { localStorage.setItem(STORE_KEY, JSON.stringify(data)); }
+  function saveData(data) {
+    localStorage.setItem(STORE_KEY, JSON.stringify(data));
+    if (supa) pushToSupabase();
+  }
 
   function showToast(msg) {
     const t = document.getElementById('toast');
@@ -1159,7 +1291,12 @@
     if (!document.getElementById('cf-start').value) cfPreset('month');
   }
 
-  init();
+  (async function start() {
+    initSupabaseClient();
+    if (supa) { await pullFromSupabase(); }
+    init();
+    updateConnStatusUI();
+  })();
   </script>
 
 </body>
