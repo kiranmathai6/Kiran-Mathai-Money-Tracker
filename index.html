@@ -645,10 +645,25 @@
     if (!url || !key) { showToast('Enter both the URL and the key'); return; }
     localStorage.setItem(CONN_KEY, JSON.stringify({ url, key }));
     initSupabaseClient();
+    if (!supa) { showToast('Could not connect — check the URL and key'); return; }
     showToast('Connecting…');
-    await pushToSupabase();
+    try {
+      const check = await supa.from('banks').select('name').limit(1);
+      if (check.error) throw check.error;
+      if (check.data && check.data.length) {
+        // Remote already has data (e.g. set up from another device) — pull it down rather than overwrite it.
+        await pullFromSupabase();
+        init();
+        showToast('Connected — pulled your existing data from Supabase');
+      } else {
+        // Remote is empty — this is the first device connecting, push what's here up to seed it.
+        await pushToSupabase();
+        showToast('Connected — your data is now uploaded');
+      }
+    } catch (err) {
+      showToast('Connection failed: ' + err.message);
+    }
     updateConnStatusUI();
-    showToast('Connected — your data is now uploaded');
   });
 
   function disconnectSupabase() {
