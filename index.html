@@ -7,7 +7,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-
   <style>
     :root {
       --bg:          #F4F5F7;
@@ -30,7 +29,6 @@
       --radius-sm:   8px;
       --shadow:      0 1px 2px rgba(18,22,31,0.04), 0 2px 8px rgba(18,22,31,0.05);
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Inter', -apple-system, sans-serif;
@@ -39,7 +37,6 @@
       -webkit-font-smoothing: antialiased;
     }
     .mono { font-family: 'IBM Plex Mono', monospace; font-variant-numeric: tabular-nums; }
-
     header {
       background: var(--navy);
       padding: 34px 24px 30px;
@@ -57,7 +54,6 @@
       font-size: clamp(28px, 5.5vw, 40px); color: #fff; line-height: 1.15;
     }
     .tagline { margin-top: 10px; font-size: 13.5px; color: rgba(255,255,255,0.65); }
-
     /* Hamburger */
     .hamburger-btn {
       position: fixed; top: 16px; right: 16px; z-index: 200;
@@ -74,7 +70,6 @@
     /* darker variant once user scrolls past header, applied via JS */
     .hamburger-btn.on-light { background: var(--bg-card); border-color: var(--line); box-shadow: var(--shadow); }
     .hamburger-btn.on-light span { background: var(--ink); }
-
     .drawer-scrim {
       position: fixed; inset: 0; background: rgba(15,20,30,0.42); z-index: 190;
       opacity: 0; pointer-events: none; transition: opacity .2s;
@@ -91,7 +86,6 @@
       font-size: 11px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase;
       color: var(--ink-soft); margin-bottom: 14px; padding: 0 6px;
     }
-
     nav.bottom-nav {
       position: fixed; left: 0; right: 0; bottom: 0; z-index: 100;
       background: var(--bg-card); border-top: 1px solid var(--line);
@@ -106,25 +100,20 @@
     nav.bottom-nav a svg { width: 19px; height: 19px; stroke: var(--ink-soft); fill: none; stroke-width: 1.7; }
     nav.bottom-nav a.active { color: var(--navy); }
     nav.bottom-nav a.active svg { stroke: var(--navy); }
-
     .container { max-width: 860px; margin: 0 auto; padding: 20px 16px 24px; display: none; flex-direction: column; gap: 16px; }
     .container.active { display: flex; }
-
     .card { background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); }
     .card-header { margin-bottom: 18px; display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
     .card-header h2 { font-size: 16px; font-weight: 700; color: var(--ink); letter-spacing: -0.01em; }
     .card-header p { font-size: 13px; color: var(--ink-soft); margin-top: 2px; }
-
     .summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
     .sbox { background: var(--bg-soft); border: 1px solid var(--line-soft); border-radius: var(--radius-sm); padding: 14px; }
     .sbox label { display: block; font-size: 10px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 6px; }
     .sbox .val { font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 19px; color: var(--ink); font-variant-numeric: tabular-nums; }
     .sbox.inc .val { color: var(--success); }
     .sbox.exp .val { color: var(--danger); }
-
     .quick-row { display: flex; flex-wrap: wrap; gap: 8px; }
     .quick-row button { flex: 1; min-width: 120px; }
-
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 7px;
       font-family: 'Inter', sans-serif; font-size: 13.5px; font-weight: 600;
@@ -142,10 +131,8 @@
     .btn-danger { background: transparent; color: var(--danger); border-color: var(--line); font-size: 12px; padding: 6px 10px; }
     .btn-danger:hover { background: var(--danger-bg); border-color: var(--danger); }
     .btn-block { width: 100%; justify-content: center; padding: 12px; font-size: 14px; margin-top: 8px; }
-
     .form-stack { display: flex; flex-direction: column; gap: 14px; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-
     .fg { display: flex; flex-direction: column; gap: 6px; }
     .fg label { font-size: 11.5px; font-weight: 600; letter-spacing: 0.3px; color: var(--ink-mid); }
     .fg label .opt { font-weight: 400; font-size: 11px; color: var(--ink-soft); margin-left: 3px; }
@@ -161,7 +148,6 @@
       box-shadow: 0 0 0 3px rgba(29,53,87,0.10);
     }
     .fg textarea { height: 74px; resize: vertical; }
-
     .table-wrap { overflow-x: auto; border-radius: var(--radius-sm); border: 1px solid var(--line); }
     table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
     thead tr { background: var(--bg-soft); }
@@ -176,23 +162,18 @@
     .amt.neg { color: var(--danger); }
     .amt.pos { color: var(--success); }
     .empty-row td { text-align: center; color: var(--ink-soft); padding: 30px 16px; font-size: 13px; }
-
     .cf-btns { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
     .cf-btns .btn { flex: 1; min-width: 96px; }
-
     hr { border: none; border-top: 1px solid var(--line); margin: 16px 0; }
-
     .analytics-empty { background: var(--bg-soft); border: 1px dashed var(--line); border-radius: var(--radius-sm); padding: 36px 24px; text-align: center; }
     .analytics-empty svg { width: 30px; height: 30px; stroke: var(--ink-soft); margin-bottom: 10px; }
     .analytics-empty p { font-size: 13px; color: var(--ink-mid); line-height: 1.6; }
-
     .bank-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
     .bank-item { background: var(--bg-soft); border: 1px solid var(--line-soft); border-radius: var(--radius-sm); padding: 13px 14px; display: flex; align-items: center; justify-content: space-between; }
     .bank-item-name { font-weight: 600; font-size: 14px; color: var(--ink); display: flex; align-items: center; gap: 8px; }
     .bank-item-name svg { width: 15px; height: 15px; stroke: var(--ink-soft); }
     .bank-item-bal { font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 16px; color: var(--ink); margin-top: 3px; }
     .bank-item-opening { font-size: 11px; color: var(--ink-soft); margin-top: 2px; }
-
     .toast {
       position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%);
       background: var(--navy-dk); color: #fff; padding: 11px 20px;
@@ -201,7 +182,6 @@
       opacity: 0; transition: opacity 0.25s; pointer-events: none; white-space: nowrap;
     }
     .toast.show { opacity: 1; }
-
     .menu-list { list-style: none; display: flex; flex-direction: column; gap: 1px; }
     .menu-list li { display: flex; align-items: center; gap: 12px; padding: 12px 6px; border-radius: var(--radius-sm); cursor: pointer; transition: background 0.15s; }
     .menu-list li:hover { background: var(--bg-soft); }
@@ -209,15 +189,12 @@
     .mi-icon svg { width: 16px; height: 16px; stroke: var(--navy); }
     .mi-text strong { display: block; font-size: 13.5px; font-weight: 600; color: var(--ink); margin-bottom: 1px; }
     .mi-text span { font-size: 11.5px; color: var(--ink-soft); }
-
     .chip-list { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 10px; }
     .chip { background: var(--navy-pale); border: 1px solid var(--line); border-radius: 5px; padding: 6px 6px 6px 11px; font-size: 12.5px; display: flex; align-items: center; gap: 7px; color: var(--navy); font-weight: 600; }
     .chip button { border: none; background: none; color: var(--danger); font-weight: 700; cursor: pointer; font-size: 14px; line-height: 1; padding: 2px; }
     .inline-add { display: flex; gap: 8px; margin-top: 10px; }
     .inline-add input { flex: 1; }
-
     .section-label { font-size: 11.5px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 8px; }
-
     .rec-row {
       background: var(--bg-soft); border: 1px solid var(--line-soft); border-radius: var(--radius-sm);
       padding: 13px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px;
@@ -230,9 +207,7 @@
     .rec-row-due.due-soon { color: var(--gold); }
     .rec-row-due.overdue { color: var(--danger); }
     .rec-row-actions { display: flex; gap: 6px; align-items: center; }
-
     footer { background: var(--bg-soft); border-top: 1px solid var(--line); text-align: center; padding: 20px; font-size: 12px; color: var(--ink-soft); }
-
     /* MOBILE */
     @media (max-width: 580px) {
       .summary-grid { grid-template-columns: 1fr 1fr; }
@@ -244,13 +219,12 @@
   </style>
 </head>
 <body>
-
   <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
   <div class="drawer-scrim" id="drawerScrim"></div>
   <nav class="drawer" id="drawer">
     <h3>Settings</h3>
     <ul class="menu-list">
-      <li onclick="openPage('bank'); closeDrawer();">
+      <li onclick="openPage('tally'); closeDrawer();">
         <div class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h18M5 10v9M9 10v9M15 10v9M19 10v9M4 20h16M12 3 3 8h18Z"/></svg></div>
         <div class="mi-text"><strong>Opening balance &amp; accounts</strong><span>Add or update bank accounts</span></div>
       </li>
@@ -261,6 +235,10 @@
       <li onclick="openPage('recurring'); closeDrawer();">
         <div class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36M21 3v6h-6"/></svg></div>
         <div class="mi-text"><strong>Recurring expenses</strong><span>Rent and other repeating costs</span></div>
+      </li>
+      <li onclick="openPage('recurring-income'); closeDrawer();">
+        <div class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 1 2.64 6.36M3 21v-6h6"/></svg></div>
+        <div class="mi-text"><strong>Recurring income</strong><span>Pay reminders where the amount varies</span></div>
       </li>
       <li onclick="openPage('connection'); closeDrawer();">
         <div class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg></div>
@@ -277,7 +255,6 @@
     </ul>
     <input type="file" id="import-file" accept=".json" style="display:none" onchange="importData(event)" />
   </nav>
-
   <header>
     <div class="header-inner">
       <p class="eyebrow">Personal Finance</p>
@@ -285,7 +262,6 @@
       <p class="tagline" id="header-balance">—</p>
     </div>
   </header>
-
   <!-- HOME -->
   <div class="container active" id="page-home">
     <section class="card">
@@ -296,13 +272,13 @@
         <div class="sbox exp"><label>Expenses</label><div class="val" id="dash-expenses">$0.00</div></div>
       </div>
       <div class="quick-row">
+        <button class="btn btn-gold" onclick="openIncomePage()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+          Log Income
+        </button>
         <button class="btn btn-primary" onclick="openPage('expense')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M5 12h14"/></svg>
           Enter Expense
-        </button>
-        <button class="btn btn-gold" onclick="openPage('income')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
-          Log Income
         </button>
         <button class="btn btn-soft" onclick="openPage('tally')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h18M5 10v9M9 10v9M15 10v9M19 10v9M4 20h16M12 3 3 8h18Z"/></svg>
@@ -310,18 +286,15 @@
         </button>
       </div>
     </section>
-
+    <section class="card">
+      <div class="card-header"><h2>Spending breakdown</h2><button class="btn btn-soft" type="button" style="padding:6px 10px;font-size:12px;" onclick="openPage('analytics')">View all</button></div>
+      <div id="analytics-home-content"></div>
+    </section>
     <section class="card" id="recurring-home-card" style="display:none;">
       <div class="card-header"><h2>Upcoming recurring</h2></div>
       <div id="recurring-home-list"></div>
     </section>
-
-    <section class="card">
-      <div class="card-header"><h2>Recent activity</h2></div>
-      <div id="recent-list"></div>
-    </section>
   </div>
-
   <!-- ENTER EXPENSE -->
   <div class="container" id="page-expense">
     <section class="card">
@@ -348,7 +321,6 @@
         <button type="submit" class="btn btn-primary btn-block">Save expense</button>
       </form>
     </section>
-
     <section class="card">
       <div class="card-header"><h2>Expense records</h2></div>
       <div class="table-wrap">
@@ -359,11 +331,11 @@
       </div>
     </section>
   </div>
-
   <!-- LOG INCOME -->
   <div class="container" id="page-income">
     <section class="card">
       <div class="card-header"><h2>Log income</h2></div>
+      <p id="inc-recurring-note" style="display:none;font-size:12.5px;color:var(--navy);background:var(--navy-pale);border-radius:var(--radius-sm);padding:9px 12px;margin-bottom:14px;"></p>
       <form id="income-form">
         <div class="form-stack">
           <div class="form-row">
@@ -382,7 +354,6 @@
         <button type="submit" class="btn btn-gold btn-block">Save income</button>
       </form>
     </section>
-
     <section class="card">
       <div class="card-header"><h2>Income records</h2></div>
       <div class="table-wrap">
@@ -393,7 +364,6 @@
       </div>
     </section>
   </div>
-
   <!-- TALLY BANK -->
   <div class="container" id="page-tally">
     <section class="card">
@@ -412,7 +382,6 @@
       </form>
     </section>
   </div>
-
   <!-- CASHFLOW -->
   <div class="container" id="page-cashflow">
     <section class="card">
@@ -447,7 +416,6 @@
       </div>
     </section>
   </div>
-
   <!-- ANALYTICS -->
   <div class="container" id="page-analytics">
     <section class="card">
@@ -459,8 +427,11 @@
         </div>
       </div>
     </section>
+    <section class="card">
+      <div class="card-header"><h2>Transactions</h2><p>All recorded activity.</p></div>
+      <div id="recent-list"></div>
+    </section>
   </div>
-
   <!-- RECURRING EXPENSES -->
   <div class="container" id="page-recurring">
     <section class="card">
@@ -493,7 +464,36 @@
       </form>
     </section>
   </div>
-
+  <!-- RECURRING INCOME -->
+  <div class="container" id="page-recurring-income">
+    <section class="card">
+      <div class="card-header"><h2>Recurring income</h2><p>Pay that repeats on a schedule but changes amount each time — you'll get a reminder and fill in the actual figure.</p></div>
+      <div id="recurring-income-list"></div>
+      <hr />
+      <div class="section-label">Add recurring income</div>
+      <form id="recurring-income-form">
+        <div class="form-stack">
+          <div class="fg"><label>Name</label><input type="text" id="rec-inc-name" placeholder="e.g. Salary" value="Salary" required /></div>
+          <div class="form-row">
+            <div class="fg">
+              <label>Category</label>
+              <select id="rec-inc-category" required><option value="">Select category</option></select>
+            </div>
+            <div class="fg" id="rec-inc-bank-field">
+              <label>Bank account credited</label>
+              <select id="rec-inc-bank" required><option value="">Select account</option></select>
+            </div>
+          </div>
+          <div class="fg">
+            <label>Day of month</label>
+            <input type="number" id="rec-inc-day" min="1" max="31" placeholder="e.g. 15" value="15" required />
+          </div>
+        </div>
+        <button type="submit" class="btn btn-gold btn-block" id="rec-inc-submit-btn">Save recurring income</button>
+        <button type="button" class="btn btn-soft btn-block" id="rec-inc-cancel-btn" style="display:none;" onclick="cancelEditRecurringIncome()">Cancel edit</button>
+      </form>
+    </section>
+  </div>
   <!-- SUPABASE CONNECTION -->
   <div class="container" id="page-connection">
     <section class="card">
@@ -512,7 +512,6 @@
       <button class="btn btn-soft btn-block" type="button" id="conn-disconnect-btn" style="display:none;" onclick="disconnectSupabase()">Disconnect (keep using this device only)</button>
     </section>
   </div>
-
   <!-- CATEGORIES CONFIG -->
   <div class="container" id="page-categories">
     <section class="card">
@@ -532,28 +531,23 @@
       </div>
     </section>
   </div>
-
   <nav class="bottom-nav">
     <a href="#" class="active" data-page="home" onclick="openPage('home');return false;">
       <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 9-8 9 8M5 10v10h14V10"/></svg>Home</a>
-    <a href="#" data-page="cashflow" onclick="openPage('cashflow');return false;">
-      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8h13M7 8l3-3M7 8l3 3M17 16H4M17 16l-3-3M17 16l-3 3"/></svg>Cashflow</a>
     <a href="#" data-page="expense" onclick="openPage('expense');return false;">
       <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h9"/></svg>Expenses</a>
+    <a href="#" data-page="cashflow" onclick="openPage('cashflow');return false;">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8h13M7 8l3-3M7 8l3 3M17 16H4M17 16l-3-3M17 16l-3 3"/></svg>Cashflow</a>
     <a href="#" data-page="analytics" onclick="openPage('analytics');return false;">
       <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18M7 16v-4m5 4V8m5 8v-6"/></svg>Analytics</a>
   </nav>
-
   <div class="toast" id="toast"></div>
-
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
   const STORE_KEY = 'mathai_v2';
   const CONN_KEY = 'mathai_supabase_conn';
-
-  const DEFAULT_EXPENSE_CATS = ['Rent','Outside Food','Car','Groceries','Transport','Bills','Shopping','Investment','Other'];
+  const DEFAULT_EXPENSE_CATS = ['Rent','Dining Out','Groceries','Transport','Bills','Shopping','Investment','Activity','Travel','Car Fuel','Other'];
   const DEFAULT_INCOME_CATS  = ['Salary'];
-
   /* ---------- Supabase connection ---------- */
   let supa = null;
   function getConn() { try { return JSON.parse(localStorage.getItem(CONN_KEY) || 'null'); } catch { return null; } }
@@ -565,7 +559,6 @@
       supa = null;
     }
   }
-
   async function pullFromSupabase() {
     if (!supa) return;
     try {
@@ -578,6 +571,10 @@
         supa.from('recurring_expenses').select('*'),
       ]);
       [banksR, expCatR, incCatR, expR, incR, recR].forEach(r => { if (r.error) throw r.error; });
+      // Recurring income reminders aren't part of the Supabase schema yet, so they're device-local —
+      // preserve whatever is already saved here instead of letting a pull wipe them out.
+      let existingRecurringIncome = [];
+      try { existingRecurringIncome = JSON.parse(localStorage.getItem(STORE_KEY) || '{}').recurringIncome || []; } catch {}
       const data = {
         banks: (banksR.data || []).map(b => ({ name: b.name, opening: Number(b.opening) })),
         expenseCategories: (expCatR.data || []).map(c => c.name),
@@ -585,39 +582,33 @@
         expenses: (expR.data || []).map(e => ({ id: e.id, date: e.date, amount: Number(e.amount), bank: e.bank, category: e.category, desc: e.description, recurringId: e.recurring_id || undefined })),
         incomes: (incR.data || []).map(i => ({ id: i.id, date: i.date, amount: Number(i.amount), type: i.category, bank: i.bank })),
         recurring: (recR.data || []).map(r => ({ id: r.id, name: r.name, amount: Number(r.amount), category: r.category, bank: r.bank, dayOfMonth: r.day_of_month })),
+        recurringIncome: existingRecurringIncome,
       };
       localStorage.setItem(STORE_KEY, JSON.stringify(data));
     } catch (err) {
       showToast('Could not load from Supabase: ' + err.message);
     }
   }
-
   async function pushToSupabase() {
     if (!supa) return;
     const data = loadData();
     try {
       await supa.from('banks').delete().neq('name', '');
       if (data.banks.length) { const r = await supa.from('banks').insert(data.banks.map(b => ({ name: b.name, opening: b.opening }))); if (r.error) throw r.error; }
-
       await supa.from('expense_categories').delete().neq('name', '');
       if (data.expenseCategories.length) { const r = await supa.from('expense_categories').insert(data.expenseCategories.map(name => ({ name }))); if (r.error) throw r.error; }
-
       await supa.from('income_categories').delete().neq('name', '');
       if (data.incomeCategories.length) { const r = await supa.from('income_categories').insert(data.incomeCategories.map(name => ({ name }))); if (r.error) throw r.error; }
-
       await supa.from('expenses').delete().neq('id', -1);
       if (data.expenses.length) { const r = await supa.from('expenses').insert(data.expenses.map(e => ({ id: e.id, date: e.date, amount: e.amount, bank: e.bank, category: e.category, description: e.desc || null, recurring_id: e.recurringId || null }))); if (r.error) throw r.error; }
-
       await supa.from('income').delete().neq('id', -1);
       if (data.incomes.length) { const r = await supa.from('income').insert(data.incomes.map(i => ({ id: i.id, date: i.date, amount: i.amount, category: i.type, bank: i.bank }))); if (r.error) throw r.error; }
-
       await supa.from('recurring_expenses').delete().neq('id', '');
       if (data.recurring.length) { const r = await supa.from('recurring_expenses').insert(data.recurring.map(r => ({ id: r.id, name: r.name, amount: r.amount, category: r.category, bank: r.bank, day_of_month: r.dayOfMonth }))); if (r.error) throw r.error; }
     } catch (err) {
       showToast('Sync to Supabase failed: ' + err.message);
     }
   }
-
   function updateConnStatusUI() {
     const c = getConn();
     const label = document.getElementById('conn-status-label');
@@ -637,7 +628,6 @@
       if (disconnectBtn) disconnectBtn.style.display = 'none';
     }
   }
-
   document.getElementById('connection-form').addEventListener('submit', async function(e) {
     e.preventDefault();
     const url = document.getElementById('conn-url').value.trim();
@@ -665,16 +655,13 @@
     }
     updateConnStatusUI();
   });
-
   function disconnectSupabase() {
     localStorage.removeItem(CONN_KEY);
     supa = null;
     updateConnStatusUI();
     showToast('Disconnected — back to this device only');
   }
-
   const DEFAULT_BANK_NAME = 'Commonwealth Bank';
-
   function loadData() {
     try {
       const raw = localStorage.getItem(STORE_KEY);
@@ -691,23 +678,52 @@
           localStorage.setItem(STORE_KEY, JSON.stringify(d));
         }
         d.recurring = d.recurring || [];
+        d.recurringIncome = d.recurringIncome || [];
+        if (!localStorage.getItem('mathai_cat_names_v2_migrated')) {
+          const CAT_RENAMES = { 'outside food': 'Dining Out', 'travelling': 'Travel' };
+          const renameCat = c => CAT_RENAMES[c.toLowerCase()] || c;
+          d.expenseCategories = d.expenseCategories.map(renameCat);
+          d.expenses.forEach(e => { e.category = renameCat(e.category); });
+          d.recurring.forEach(r => { r.category = renameCat(r.category); });
+          localStorage.setItem('mathai_cat_names_v2_migrated', '1');
+          localStorage.setItem(STORE_KEY, JSON.stringify(d));
+        }
         if (!d.expenseCategories.some(c => c.toLowerCase() === 'investment')) d.expenseCategories.push('Investment');
+        if (!d.expenseCategories.some(c => c.toLowerCase() === 'activity')) d.expenseCategories.push('Activity');
+        if (!d.expenseCategories.some(c => c.toLowerCase() === 'travel')) d.expenseCategories.push('Travel');
+        if (!localStorage.getItem('mathai_cat_names_v3_migrated')) {
+          const renameCarFuel = c => c.toLowerCase() === 'car' ? 'Car Fuel' : c;
+          d.expenseCategories = d.expenseCategories.map(renameCarFuel);
+          d.expenses.forEach(e => { e.category = renameCarFuel(e.category); });
+          d.recurring.forEach(r => { r.category = renameCarFuel(r.category); });
+          // move Car Fuel and Other to the end, in that order
+          const TAIL_ORDER = ['car fuel', 'other'];
+          const tail = [];
+          d.expenseCategories = d.expenseCategories.filter(c => {
+            if (TAIL_ORDER.includes(c.toLowerCase())) { tail.push(c); return false; }
+            return true;
+          });
+          tail.sort((a, b) => TAIL_ORDER.indexOf(a.toLowerCase()) - TAIL_ORDER.indexOf(b.toLowerCase()));
+          d.expenseCategories = d.expenseCategories.concat(tail);
+          localStorage.setItem('mathai_cat_names_v3_migrated', '1');
+          localStorage.setItem(STORE_KEY, JSON.stringify(d));
+        }
         d.banks.forEach(b => { if (b.opening === undefined) b.opening = b.balance || 0; });
         if (!d.banks.length) { d.banks.push({ name: DEFAULT_BANK_NAME, opening: 0 }); localStorage.setItem(STORE_KEY, JSON.stringify(d)); }
         return d;
       }
     } catch(e) { /* fall through to fresh data */ }
-    const fresh = { banks: [{ name: DEFAULT_BANK_NAME, opening: 0 }], expenses: [], incomes: [], expenseCategories: DEFAULT_EXPENSE_CATS.slice(), incomeCategories: DEFAULT_INCOME_CATS.slice(), recurring: [] };
+    const fresh = { banks: [{ name: DEFAULT_BANK_NAME, opening: 0 }], expenses: [], incomes: [], expenseCategories: DEFAULT_EXPENSE_CATS.slice(), incomeCategories: DEFAULT_INCOME_CATS.slice(), recurring: [], recurringIncome: [] };
     localStorage.setItem('mathai_salary_only_migrated', '1');
+    localStorage.setItem('mathai_cat_names_v2_migrated', '1');
+    localStorage.setItem('mathai_cat_names_v3_migrated', '1');
     localStorage.setItem(STORE_KEY, JSON.stringify(fresh));
     return fresh;
   }
-
   function saveData(data) {
     localStorage.setItem(STORE_KEY, JSON.stringify(data));
     if (supa) pushToSupabase();
   }
-
   function showToast(msg) {
     const t = document.getElementById('toast');
     t.textContent = msg;
@@ -715,7 +731,6 @@
     clearTimeout(showToast._t);
     showToast._t = setTimeout(() => t.classList.remove('show'), 2200);
   }
-
   function fmt(n) { return '$' + parseFloat(n || 0).toFixed(2); }
   function fmtDateDisplay(str) {
     if (!str) return '';
@@ -723,7 +738,6 @@
     return d.toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' });
   }
   function todayISO() { return new Date().toISOString().split('T')[0]; }
-
   /* ---------- Page routing ---------- */
   function openPage(name) {
     document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
@@ -734,7 +748,6 @@
     });
     window.scrollTo({ top: 0 });
   }
-
   /* ---------- Hamburger drawer ---------- */
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const drawer = document.getElementById('drawer');
@@ -750,7 +763,6 @@
   window.addEventListener('scroll', () => {
     hamburgerBtn.classList.toggle('on-light', window.scrollY > 140);
   });
-
   /* ---------- Bank balances ---------- */
   function bankBalance(data, bankName) {
     const bank = data.banks.find(b => b.name === bankName);
@@ -759,7 +771,6 @@
     const paid = data.expenses.filter(e => e.bank === bankName).reduce((s, e) => s + e.amount, 0);
     return bank.opening + credited - paid;
   }
-
   function populateBankDropdowns() {
     const data = loadData();
     const onlyOne = data.banks.length === 1;
@@ -773,7 +784,6 @@
       if (field) field.style.display = onlyOne ? 'none' : 'flex';
     });
   }
-
   function populateCategoryDropdowns() {
     const data = loadData();
     const expSel = document.getElementById('exp-category');
@@ -781,7 +791,6 @@
     expSel.innerHTML = '<option value="">Select category</option>' +
       data.expenseCategories.map(c => `<option>${c}</option>`).join('');
     expSel.value = curExp;
-
     const incSel = document.getElementById('inc-type');
     const curInc = incSel.value;
     const onlyOneInc = data.incomeCategories.length === 1;
@@ -789,7 +798,6 @@
       data.incomeCategories.map(c => `<option>${c}</option>`).join('');
     incSel.value = curInc || (onlyOneInc ? data.incomeCategories[0] : '');
   }
-
   function renderBankList() {
     const data = loadData();
     const list = document.getElementById('bank-list');
@@ -814,7 +822,6 @@
       </div>`;
     }).join('');
   }
-
   function saveOpeningBalance(index) {
     const data = loadData();
     const input = document.getElementById('open-bal-' + index);
@@ -826,7 +833,6 @@
     updateDashboard();
     showToast('Balance updated');
   }
-
   document.getElementById('bank-form').addEventListener('submit', function(e) {
     e.preventDefault();
     const name    = document.getElementById('bank-name').value.trim();
@@ -846,9 +852,9 @@
     renderBankList();
     populateBankDropdowns();
     populateRecurringDropdowns();
+    populateRecurringIncomeDropdowns();
     updateDashboard();
   });
-
   function deleteBank(index) {
     const data = loadData();
     data.banks.splice(index, 1);
@@ -856,9 +862,9 @@
     renderBankList();
     populateBankDropdowns();
     populateRecurringDropdowns();
+    populateRecurringIncomeDropdowns();
     showToast('Account removed');
   }
-
   /* ---------- Categories ---------- */
   function renderCategoryChips() {
     const data = loadData();
@@ -883,6 +889,7 @@
     renderCategoryChips();
     populateCategoryDropdowns();
     populateRecurringDropdowns();
+    populateRecurringIncomeDropdowns();
     showToast('Category added');
   }
   function removeCategory(kind, index) {
@@ -893,9 +900,9 @@
     renderCategoryChips();
     populateCategoryDropdowns();
     populateRecurringDropdowns();
+    populateRecurringIncomeDropdowns();
     showToast('Category removed');
   }
-
   /* ---------- Recurring expenses ---------- */
   function isoMonth(d) { return d.toISOString().slice(0, 7); }
   function dateForMonth(year, month, day) {
@@ -914,7 +921,6 @@
     return null;
   }
   function daysBetween(a, b) { return Math.round((a - b) / 86400000); }
-
   function populateRecurringDropdowns() {
     const data = loadData();
     const catSel = document.getElementById('rec-category');
@@ -927,7 +933,6 @@
     const field = document.getElementById('rec-bank-field');
     if (field) field.style.display = onlyOne ? 'none' : 'flex';
   }
-
   function renderRecurring() {
     const data = loadData();
     const today = new Date(); today.setHours(0, 0, 0, 0);
@@ -958,35 +963,41 @@
     }
     renderRecurringHome();
   }
-
   function renderRecurringHome() {
     const data = loadData();
     const today = new Date(); today.setHours(0, 0, 0, 0);
     const card = document.getElementById('recurring-home-card');
     const el = document.getElementById('recurring-home-list');
-    if (!data.recurring.length) { card.style.display = 'none'; return; }
-    const items = data.recurring.map(item => ({ item, due: nextDueDate(item, data.expenses) }))
-      .sort((a, b) => a.due - b.due);
-    const relevant = items.filter(x => daysBetween(x.due, today) <= 7);
+    const expenseItems = data.recurring.map(item => ({ kind: 'expense', item, due: nextDueDate(item, data.expenses) }));
+    const incomeItems  = (data.recurringIncome || []).map(item => ({ kind: 'income', item, due: nextDueDate(item, data.incomes) }));
+    const all = [...expenseItems, ...incomeItems].filter(x => x.due);
+    if (!all.length) { card.style.display = 'none'; return; }
+    all.sort((a, b) => a.due - b.due);
+    const relevant = all.filter(x => daysBetween(x.due, today) <= 7);
     if (!relevant.length) { card.style.display = 'none'; return; }
     card.style.display = 'block';
-    el.innerHTML = relevant.map(({ item, due }) => {
+    el.innerHTML = relevant.map(({ kind, item, due }) => {
       const diff = daysBetween(due, today);
       const dueClass = diff < 0 ? 'overdue' : (diff <= 3 ? 'due-soon' : '');
       const dueLabel = diff < 0 ? `Overdue — was due ${fmtDateDisplay(due.toISOString().slice(0,10))}`
         : diff === 0 ? 'Due today'
         : `Due ${fmtDateDisplay(due.toISOString().slice(0,10))}`;
+      const amountLabel = kind === 'expense'
+        ? `<span class="amt" style="font-size:13px;">${fmt(item.amount)}</span>`
+        : `<span style="font-size:11px;color:var(--ink-soft);font-weight:500;">amount varies</span>`;
+      const action = kind === 'expense'
+        ? `<button class="btn btn-primary" style="padding:7px 12px;font-size:12.5px;" onclick="logRecurringNow('${item.id}')">Log now</button>`
+        : `<button class="btn btn-gold" style="padding:7px 12px;font-size:12.5px;" onclick="logRecurringIncomeNow('${item.id}')">Log income</button>`;
       return `
       <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line-soft);gap:10px;flex-wrap:wrap;">
         <div>
-          <div style="font-size:13px;font-weight:600;">${item.name} <span class="amt" style="font-size:13px;">${fmt(item.amount)}</span></div>
+          <div style="font-size:13px;font-weight:600;">${item.name} ${amountLabel}</div>
           <div class="rec-row-due ${dueClass}" style="margin-top:2px;">${dueLabel}</div>
         </div>
-        <button class="btn btn-primary" style="padding:7px 12px;font-size:12.5px;" onclick="logRecurringNow('${item.id}')">Log now</button>
+        ${action}
       </div>`;
     }).join('');
   }
-
   function logRecurringNow(id) {
     const data = loadData();
     const item = data.recurring.find(r => r.id === id);
@@ -1000,7 +1011,6 @@
     showToast(item.name + ' logged');
     renderExpenseTable(); renderBankList(); updateDashboard(); renderAnalytics(); renderRecent(); renderRecurring();
   }
-
   function deleteRecurring(id) {
     const data = loadData();
     data.recurring = data.recurring.filter(r => r.id !== id);
@@ -1008,7 +1018,6 @@
     renderRecurring();
     showToast('Recurring expense removed');
   }
-
   document.getElementById('recurring-form').addEventListener('submit', function(e) {
     e.preventDefault();
     const name = document.getElementById('rec-name').value.trim();
@@ -1028,9 +1037,136 @@
     document.getElementById('rec-day').value = 29;
     renderRecurring();
   });
-
   function uid() { return 'r' + Date.now() + Math.random().toString(36).slice(2, 8); }
-
+  /* ---------- Recurring income (amount varies each time) ---------- */
+  let activeIncomeRecurringId = null;
+  function openIncomePage() {
+    activeIncomeRecurringId = null;
+    const note = document.getElementById('inc-recurring-note');
+    if (note) note.style.display = 'none';
+    openPage('income');
+  }
+  function populateRecurringIncomeDropdowns() {
+    const data = loadData();
+    const catSel = document.getElementById('rec-inc-category');
+    const onlyOneCat = data.incomeCategories.length === 1;
+    catSel.innerHTML = (onlyOneCat ? '' : '<option value="">Select category</option>') +
+      data.incomeCategories.map(c => `<option>${c}</option>`).join('');
+    catSel.value = onlyOneCat ? data.incomeCategories[0] : '';
+    const bankSel = document.getElementById('rec-inc-bank');
+    const onlyOneBank = data.banks.length === 1;
+    bankSel.innerHTML = (onlyOneBank ? '' : '<option value="">Select account</option>') +
+      data.banks.map(b => `<option value="${b.name}">${b.name}</option>`).join('');
+    bankSel.value = onlyOneBank ? data.banks[0].name : '';
+    const field = document.getElementById('rec-inc-bank-field');
+    if (field) field.style.display = onlyOneBank ? 'none' : 'flex';
+  }
+  function renderRecurringIncome() {
+    const data = loadData();
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const list = document.getElementById('recurring-income-list');
+    if (!data.recurringIncome.length) {
+      list.innerHTML = '<p style="font-size:13px;color:var(--ink-soft);margin-bottom:6px;">No recurring income yet — add one below.</p>';
+    } else {
+      list.innerHTML = data.recurringIncome.map(item => {
+        const due = nextDueDate(item, data.incomes);
+        const diff = daysBetween(due, today);
+        const dueClass = diff < 0 ? 'overdue' : (diff <= 7 ? 'due-soon' : '');
+        const dueLabel = diff < 0 ? `Overdue — was due ${fmtDateDisplay(due.toISOString().slice(0,10))}`
+          : diff === 0 ? 'Due today'
+          : `Next due ${fmtDateDisplay(due.toISOString().slice(0,10))}`;
+        return `
+        <div class="rec-row">
+          <div class="rec-row-main">
+            <div class="rec-row-name">${item.name}</div>
+            <div class="rec-row-meta">amount varies · ${item.category} · ${item.bank} · day ${item.dayOfMonth}</div>
+            <div class="rec-row-due ${dueClass}">${dueLabel}</div>
+          </div>
+          <div class="rec-row-actions">
+            <button class="btn btn-soft" style="padding:8px 12px;font-size:12.5px;" onclick="editRecurringIncome('${item.id}')">Edit</button>
+            <button class="btn btn-gold" style="padding:8px 12px;font-size:12.5px;" onclick="logRecurringIncomeNow('${item.id}')">Log income</button>
+            <button class="btn btn-danger" onclick="deleteRecurringIncome('${item.id}')">Remove</button>
+          </div>
+        </div>`;
+      }).join('');
+    }
+    renderRecurringHome();
+  }
+  function logRecurringIncomeNow(id) {
+    const data = loadData();
+    const item = data.recurringIncome.find(r => r.id === id);
+    if (!item) return;
+    const due = nextDueDate(item, data.incomes);
+    openPage('income');
+    document.getElementById('inc-date').value = due.toISOString().slice(0, 10);
+    document.getElementById('inc-type').value = item.category;
+    document.getElementById('inc-bank').value = item.bank;
+    document.getElementById('inc-amount').value = '';
+    activeIncomeRecurringId = id;
+    const note = document.getElementById('inc-recurring-note');
+    if (note) { note.textContent = `Logging "${item.name}" — enter this pay's amount below and save.`; note.style.display = 'block'; }
+    document.getElementById('inc-amount').focus();
+  }
+  let editingRecurringIncomeId = null;
+  function editRecurringIncome(id) {
+    const data = loadData();
+    const item = data.recurringIncome.find(r => r.id === id);
+    if (!item) return;
+    editingRecurringIncomeId = id;
+    populateRecurringIncomeDropdowns();
+    document.getElementById('rec-inc-name').value = item.name;
+    document.getElementById('rec-inc-category').value = item.category;
+    document.getElementById('rec-inc-bank').value = item.bank;
+    document.getElementById('rec-inc-day').value = item.dayOfMonth;
+    document.getElementById('rec-inc-submit-btn').textContent = 'Update recurring income';
+    document.getElementById('rec-inc-cancel-btn').style.display = 'block';
+    document.getElementById('rec-inc-name').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  function cancelEditRecurringIncome() {
+    editingRecurringIncomeId = null;
+    document.getElementById('recurring-income-form').reset();
+    document.getElementById('rec-inc-name').value = 'Salary';
+    document.getElementById('rec-inc-day').value = 15;
+    populateRecurringIncomeDropdowns();
+    document.getElementById('rec-inc-submit-btn').textContent = 'Save recurring income';
+    document.getElementById('rec-inc-cancel-btn').style.display = 'none';
+  }
+  function deleteRecurringIncome(id) {
+    const data = loadData();
+    data.recurringIncome = data.recurringIncome.filter(r => r.id !== id);
+    saveData(data);
+    if (editingRecurringIncomeId === id) cancelEditRecurringIncome();
+    renderRecurringIncome();
+    showToast('Recurring income removed');
+  }
+  document.getElementById('recurring-income-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('rec-inc-name').value.trim();
+    const category = document.getElementById('rec-inc-category').value;
+    const bank = document.getElementById('rec-inc-bank').value;
+    const dayOfMonth = parseInt(document.getElementById('rec-inc-day').value, 10);
+    if (!name || !category || !bank || !dayOfMonth || dayOfMonth < 1 || dayOfMonth > 31) {
+      showToast('Please fill in all fields'); return;
+    }
+    const data = loadData();
+    if (editingRecurringIncomeId) {
+      const item = data.recurringIncome.find(r => r.id === editingRecurringIncomeId);
+      if (item) { item.name = name; item.category = category; item.bank = bank; item.dayOfMonth = dayOfMonth; }
+      showToast('Recurring income updated');
+    } else {
+      data.recurringIncome.push({ id: uid(), name, category, bank, dayOfMonth });
+      showToast('Recurring income saved');
+    }
+    saveData(data);
+    this.reset();
+    document.getElementById('rec-inc-name').value = 'Salary';
+    document.getElementById('rec-inc-day').value = 15;
+    editingRecurringIncomeId = null;
+    document.getElementById('rec-inc-submit-btn').textContent = 'Save recurring income';
+    document.getElementById('rec-inc-cancel-btn').style.display = 'none';
+    populateRecurringIncomeDropdowns();
+    renderRecurringIncome();
+  });
   /* ---------- Expenses ---------- */
   document.getElementById('expense-form').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -1052,7 +1188,6 @@
     renderAnalytics();
     renderRecent();
   });
-
   function deleteExpense(id) {
     const data = loadData();
     data.expenses = data.expenses.filter(e => e.id !== id);
@@ -1060,7 +1195,6 @@
     renderExpenseTable(); renderBankList(); updateDashboard(); renderAnalytics(); renderRecent();
     showToast('Expense deleted');
   }
-
   function renderExpenseTable() {
     const data = loadData();
     const tbody = document.getElementById('expense-table-body');
@@ -1076,7 +1210,6 @@
         <td><button class="btn btn-danger" onclick="deleteExpense(${r.id})">Remove</button></td>
       </tr>`).join('');
   }
-
   /* ---------- Income ---------- */
   document.getElementById('income-form').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -1086,14 +1219,18 @@
     const bank   = document.getElementById('inc-bank').value;
     if (!date || !amount || !type || !bank) { showToast('Please fill in all required fields'); return; }
     const data = loadData();
-    data.incomes.push({ id: Date.now(), date, amount, type, bank });
+    const record = { id: Date.now(), date, amount, type, bank };
+    if (activeIncomeRecurringId) record.recurringId = activeIncomeRecurringId;
+    data.incomes.push(record);
     saveData(data);
     showToast('Income saved');
     this.reset();
     document.getElementById('inc-date').value = todayISO();
-    renderIncomeTable(); renderBankList(); updateDashboard(); renderRecent();
+    activeIncomeRecurringId = null;
+    const recNote = document.getElementById('inc-recurring-note');
+    if (recNote) recNote.style.display = 'none';
+    renderIncomeTable(); renderBankList(); updateDashboard(); renderRecent(); renderRecurringHome();
   });
-
   function deleteIncome(id) {
     const data = loadData();
     data.incomes = data.incomes.filter(i => i.id !== id);
@@ -1101,7 +1238,6 @@
     renderIncomeTable(); renderBankList(); updateDashboard(); renderRecent();
     showToast('Income record deleted');
   }
-
   function renderIncomeTable() {
     const data = loadData();
     const tbody = document.getElementById('income-table-body');
@@ -1116,14 +1252,13 @@
         <td><button class="btn btn-danger" onclick="deleteIncome(${r.id})">Remove</button></td>
       </tr>`).join('');
   }
-
-  /* ---------- Recent activity (home) ---------- */
+  /* ---------- Transactions (Analytics page) ---------- */
   function renderRecent() {
     const data = loadData();
     const merged = [
       ...data.expenses.map(e => ({ ...e, kind: 'expense' })),
       ...data.incomes.map(i => ({ ...i, kind: 'income' })),
-    ].sort((a, b) => new Date(b.date) - new Date(a.date) || b.id - a.id).slice(0, 6);
+    ].sort((a, b) => new Date(b.date) - new Date(a.date) || b.id - a.id);
     const el = document.getElementById('recent-list');
     if (!merged.length) { el.innerHTML = '<p style="font-size:13px;color:var(--ink-soft);">Nothing logged yet.</p>'; return; }
     el.innerHTML = merged.map(x => x.kind === 'expense' ? `
@@ -1136,7 +1271,6 @@
         <div class="amt pos">+${fmt(x.amount)}</div>
       </div>`).join('');
   }
-
   /* ---------- Dashboard ---------- */
   function updateDashboard() {
     const data = loadData();
@@ -1149,10 +1283,8 @@
     document.getElementById('dash-balance').textContent  = fmt(balance);
     document.getElementById('header-balance').textContent = 'Current balance ' + fmt(balance);
   }
-
   /* ---------- Cashflow ---------- */
   let monthlyOn = false;
-
   function cfPreset(range) {
     const now = new Date();
     let start;
@@ -1169,7 +1301,6 @@
     document.getElementById('cf-end').value   = end;
     runCashflow();
   }
-
   function toggleMonthly() {
     monthlyOn = !monthlyOn;
     document.getElementById('cf-monthly-btn').classList.toggle('active', monthlyOn);
@@ -1177,14 +1308,12 @@
     document.getElementById('cf-monthly-wrap').style.display = monthlyOn ? 'block' : 'none';
     runCashflow();
   }
-
   function runCashflow() {
     const start = document.getElementById('cf-start').value;
     const end   = document.getElementById('cf-end').value;
     if (!start || !end) { showToast('Please select a date range'); return; }
     const data = loadData();
     const inRange = r => r.date >= start && r.date <= end;
-
     if (!monthlyOn) {
       const inflow  = data.incomes.filter(inRange).reduce((s, r) => s + r.amount, 0);
       const outflow = data.expenses.filter(inRange).reduce((s, r) => s + r.amount, 0);
@@ -1214,13 +1343,12 @@
       }
     }
   }
-
   /* ---------- Analytics ---------- */
   const CAT_COLORS = ['#1D3557','#9C7A2E','#1E7A4C','#5B6472','#8A93A3','#0F5B78','#7A3B3B','#3D6B5C','#5A4E8C','#946A2C'];
-
-  function renderAnalytics() {
+  function renderAnalyticsInto(containerId) {
     const data = loadData();
-    const container = document.getElementById('analytics-content');
+    const container = document.getElementById(containerId);
+    if (!container) return;
     if (!data.expenses.length) {
       container.innerHTML = `<div class="analytics-empty">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18M7 16v-4m5 4V8m5 8v-6"/></svg>
@@ -1249,7 +1377,10 @@
         '<span class="amt" style="font-size:16px;color:var(--danger);">' + fmt(grand) + '</span>' +
       '</div></div>';
   }
-
+  function renderAnalytics() {
+    renderAnalyticsInto('analytics-content');
+    renderAnalyticsInto('analytics-home-content');
+  }
   /* ---------- Export / Import ---------- */
   function exportData() {
     const data = loadData();
@@ -1263,7 +1394,6 @@
     showToast('Data exported');
     closeDrawer();
   }
-
   function importData(event) {
     const file = event.target.files[0];
     if (!file) return;
@@ -1277,6 +1407,7 @@
         imported.expenseCategories = imported.expenseCategories || DEFAULT_EXPENSE_CATS.slice();
         imported.incomeCategories  = imported.incomeCategories  || DEFAULT_INCOME_CATS.slice();
         imported.recurring = imported.recurring || [];
+        imported.recurringIncome = imported.recurringIncome || [];
         saveData(imported);
         init();
         showToast('Data imported');
@@ -1288,13 +1419,13 @@
     event.target.value = '';
     closeDrawer();
   }
-
   /* ---------- Init ---------- */
   function init() {
     document.querySelectorAll('input[type="date"]').forEach(i => { if (!i.value) i.value = todayISO(); });
     populateBankDropdowns();
     populateCategoryDropdowns();
     populateRecurringDropdowns();
+    populateRecurringIncomeDropdowns();
     renderBankList();
     renderCategoryChips();
     renderExpenseTable();
@@ -1303,9 +1434,9 @@
     renderAnalytics();
     renderRecent();
     renderRecurring();
+    renderRecurringIncome();
     if (!document.getElementById('cf-start').value) cfPreset('month');
   }
-
   (async function start() {
     initSupabaseClient();
     if (supa) { await pullFromSupabase(); }
@@ -1313,6 +1444,5 @@
     updateConnStatusUI();
   })();
   </script>
-
 </body>
 </html>
